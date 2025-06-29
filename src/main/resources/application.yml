@@ -1,0 +1,16 @@
+
+management:
+  server:
+    port: 8080
+  endpoint:
+    health:
+      show-details: always
+      show-components: always
+    web:
+      exposure:
+        include: "health,info,prometheus"
+  security:
+    enabled: false
+#server.error.whitelabel.enabled=false
+#security.basic.enabled=false
+#management.security.enabled=false
