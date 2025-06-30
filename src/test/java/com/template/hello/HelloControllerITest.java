@@ -1,4 +1,4 @@
-package com.template.springboot;
+package com.template.hello;
 
 import org.junit.jupiter.api.Test;
 

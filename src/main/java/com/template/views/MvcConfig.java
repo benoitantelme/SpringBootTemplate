@@ -1,4 +1,4 @@
-package com.template.hello;
+package com.template.views;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
