@@ -9,13 +9,6 @@ import org.springframework.context.ApplicationContext;
 @SpringBootApplication
 public class Application {
 
-//	@Bean
-//	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//		http.securityMatcher("/actuator/**")
-//				.authorizeHttpRequests((authorize) -> authorize.requestMatchers("/actuator/**").permitAll());
-//		return http.build();
-//	}
-
 	public static void main(String[] args) {
 		ApplicationContext ctx = SpringApplication.run(Application.class, args);
 

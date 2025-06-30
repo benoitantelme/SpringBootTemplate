@@ -17,7 +17,7 @@ public class HelloControllerITest {
 
     @Test
     public void getHello() throws Exception {
-        ResponseEntity<String> response = template.getForEntity("/", String.class);
+        ResponseEntity<String> response = template.getForEntity("/hello", String.class);
         assertThat(response.getBody()).isEqualTo("Greetings from Spring Boot!");
     }
 }
