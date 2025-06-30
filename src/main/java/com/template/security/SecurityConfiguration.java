@@ -15,14 +15,6 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfiguration {
 
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//        http.securityMatcher("/actuator/**")
-//                .authorizeHttpRequests((authorize) -> authorize.
-//                        requestMatchers("/actuator/**").permitAll());
-//        return http.build();
-//    }
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
