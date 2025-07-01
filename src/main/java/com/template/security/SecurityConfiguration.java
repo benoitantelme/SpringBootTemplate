@@ -40,7 +40,7 @@ public class SecurityConfiguration {
                 //    TODO: encoding
                 User.withDefaultPasswordEncoder()
                         .username("user")
-                        .password("password")
+                        .password("user")
                         .roles("USER")
                         .build();
 

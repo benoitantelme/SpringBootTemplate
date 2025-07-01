@@ -2,13 +2,20 @@
 management:
   server:
     port: 8080
-  endpoint:
+  endpoints:
     health:
       show-details: always
       show-components: always
+    metrics:
+      enabled: true
+    env:
+      show-values: WHEN_AUTHORIZED
+      keys-to-sanitize: password,secret
+    configprops:
+      show-values: WHEN_AUTHORIZED
     web:
       exposure:
-        include: "health,info,prometheus"
+        include: health, info, metrics, beans, env, configprops
   security:
     enabled: false
 #server.error.whitelabel.enabled=false
