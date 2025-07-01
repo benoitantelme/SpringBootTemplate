@@ -2,7 +2,7 @@
 management:
   server:
     port: 8080
-  endpoints:
+  endpoint:
     health:
       show-details: always
       show-components: always
@@ -13,6 +13,7 @@ management:
       keys-to-sanitize: password,secret
     configprops:
       show-values: WHEN_AUTHORIZED
+  endpoints:
     web:
       exposure:
         include: health, info, metrics, beans, env, configprops
