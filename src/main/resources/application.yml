@@ -19,6 +19,15 @@ management:
         include: health, info, metrics, beans, env, configprops
   security:
     enabled: true
+
+
+spring:
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: create-drop
 #server.error.whitelabel.enabled=false
 #security.basic.enabled=false
 #management.security.enabled=false
