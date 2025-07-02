@@ -19,6 +19,3 @@ management:
         include: health, info, metrics, beans, env, configprops
   security:
     enabled: true
-#server.error.whitelabel.enabled=false
-#security.basic.enabled=false
-#management.security.enabled=false
