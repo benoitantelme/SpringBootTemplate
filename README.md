@@ -47,6 +47,12 @@ java -cp YourJar.jar com.template.Application
 * http://localhost:8080/actuator/configprops
 
 
+### Embedded H2 Trade Repo
+
+* Using h2 embedded db to have a trades repository
+* Scripts in resources/db/sql
+* name varchar(50) | counterparty varchar(50) | amount decimal | currency varchar(3)
+
 ## Authors
 
 Me
