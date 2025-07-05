@@ -1,4 +1,4 @@
-package com.template.trades.service;
+package com.template.trades;
 
 import com.template.trades.model.Currency;
 import com.template.trades.model.Trade;
@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TradeService {
@@ -44,22 +45,47 @@ public class TradeService {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 String name = rs.getString("name");
-                String counterparty = rs.getString("counterparty");
-                double value = rs.getLong("amount");
-
-                Currency currency = null;
-                try {
-                    currency = Currency.valueOf(rs.getString("currency"));
-                } catch (IllegalArgumentException e) {
-                    throw new RuntimeException(e);
-                }
-
-                trades.add(new Trade(name, counterparty, value, currency));
+                Trade trade = getTrade(name, rs);
+                trades.add(trade);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return trades;
+    }
+
+    public Optional<Trade> getTrade(String name) {
+        Optional<Trade> trade = Optional.empty();
+
+        try (Connection conn = dataSource.getConnection()) {
+            PreparedStatement pstmt = conn.prepareStatement(
+                    "select counterparty,amount,currency from trades where name=?"
+            );
+            pstmt.setString(1, name);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                trade = Optional.of(getTrade(name, rs));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return trade;
+    }
+
+    private static Trade getTrade(String name, ResultSet rs) throws SQLException {
+        Trade trade;
+        String counterparty = rs.getString("counterparty");
+        double value = rs.getLong("amount");
+
+        Currency currency = null;
+        try {
+            currency = Currency.valueOf(rs.getString("currency"));
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException(e);
+        }
+
+        trade = new Trade(name, counterparty, value, currency);
+        return trade;
     }
 
 }
