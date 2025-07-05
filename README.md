@@ -54,6 +54,13 @@ java -cp YourJar.jar com.template.Application
 * name varchar(50) | counterparty varchar(50) | amount decimal | currency varchar(3)
 * Controller for get and getAll
 
+
+### Swagger Open API
+
+* http://localhost:8080/swagger-ui/index.html
+
+
+
 ## Authors
 
 Me
