@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
@@ -26,6 +27,7 @@ public class ViewsTest {
                 .andExpect(content().string(containsString("<label> Password: <input type=\"password\" name=\"password\"/> </label>")));
     }
 
+    @WithMockUser(roles = "USER", username = "user")
     @Test
     public void getHome() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/home").accept(MediaType.TEXT_HTML))

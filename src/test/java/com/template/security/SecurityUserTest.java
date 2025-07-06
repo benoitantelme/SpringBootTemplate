@@ -20,8 +20,14 @@ public class SecurityUserTest {
     @WithMockUser(roles = "USER", username = "user")
     @Test
     void testHomeRightPw() throws Exception {
-        mvc.perform(get("/"))
-                .andExpect(status().isOk());
+        mvc.perform(get("/")).andExpect(status().isOk());
     }
+
+    @Test
+    void testHomeWrongPw() throws Exception {
+        // 302 for login redirection, http basic does not work here actually
+        mvc.perform(get("/")).andExpect(status().isFound());
+    }
+
 
 }
