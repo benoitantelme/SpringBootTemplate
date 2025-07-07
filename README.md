@@ -22,22 +22,16 @@ Using latest versions (hopefully), with APIs, security (to be extended with oaut
 ### Installing
 
 * build using maven, will run tests
-```
-mvn clean install
-```
+* ```mvn clean install```
 
 
 ### Executing program
 
 * Run com.template.Application
-```
-java com.template.Application
-```
+* ```java com.template.Application```
 
 * Deploy as jar and run
-```
-java -cp YourJar.jar com.template.Application
-```
+* ```java -cp YourJar.jar com.template.Application```
 
 ### Actuators
 
