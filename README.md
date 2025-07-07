@@ -4,7 +4,7 @@ Template for spring boot web application.
 
 ## Description
 
-Using latest versions (hopefully), with APIs, security (to be extended with oauth2 ...), actuators, async one day.
+Using latest versions (hopefully), with APIs, security (to be extended with oauth2 ...), actuators, Open API, async.
 
 ## Getting Started
 
@@ -25,7 +25,7 @@ Using latest versions (hopefully), with APIs, security (to be extended with oaut
 * ```mvn clean install```
 
 
-### Executing program
+### Executing
 
 * Run com.template.Application
 * ```java com.template.Application```
@@ -33,12 +33,21 @@ Using latest versions (hopefully), with APIs, security (to be extended with oaut
 * Deploy as jar and run
 * ```java -cp YourJar.jar com.template.Application```
 
-### Actuators
 
-* http://localhost:8080/actuator
-* http://localhost:8080/actuator/health
-* http://localhost:8080/actuator/env
-* http://localhost:8080/actuator/configprops
+### Maven versions plugins
+
+* Allows to check if dependencies are up to date
+* ```mvn versions:display-dependency-updates```
+
+
+## APIs
+
+
+### Main entry points
+
+* Any request will be redirected to the login page, http://localhost:8080/login, so a user can authenticate (basic)
+* Main home for http://localhost:8080/ will be redirected automatically to http://localhost:8080/?continue which corresponds to http://localhost:8080/home
+* http://localhost:8080/beans
 
 
 ### Trade service
@@ -49,28 +58,40 @@ Using latest versions (hopefully), with APIs, security (to be extended with oaut
 * Controller for get and getAll
 
 
+### Beans service
+
+* Displays beans instantiated by Spring in the application
+* http://localhost:8080/beans
+
+
+### Slow service
+
+* Asynchronous service skeleton simulating a slow response
+* http://localhost:8080/slow
+
+
 ### Swagger Open API
 
 * http://localhost:8080/swagger-ui/index.html
 
 
-### Maven versions plugins
+### Actuators
 
-* Allows to check if dependencies are up to date
-* ```mvn versions:display-dependency-updates```
+* http://localhost:8080/actuator
+* http://localhost:8080/actuator/health
+* http://localhost:8080/actuator/env
+* http://localhost:8080/actuator/configprops
 
 
 ## Authors
 
-Me
-
-
 [Benoit Antelme](https://github.com/benoitantelme)
+
 
 ## Version History
 
 * 0.1
-    * Initial Release
+    * Initial(ly not) Release(d)
 
 ## License
 
