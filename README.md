@@ -60,6 +60,11 @@ java -cp YourJar.jar com.template.Application
 * http://localhost:8080/swagger-ui/index.html
 
 
+### Maven versions plugins
+
+* Allows to check if dependencies are up to date
+* ```mvn versions:display-dependency-updates```
+
 
 ## Authors
 
