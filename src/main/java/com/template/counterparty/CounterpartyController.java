@@ -1,7 +1,11 @@
-package com.template.trades;
+package com.template.counterparty;
 
+import com.template.counterparty.db.CounterpartyRepository;
+import com.template.counterparty.model.Counterparty;
+import com.template.trades.TradeService;
 import com.template.trades.model.Trade;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,24 +15,20 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-public class TradeController {
+public class CounterpartyController {
 
     @Autowired
-    TradeService tradeService;
+    CounterpartyRepository repo;
 
-    @GetMapping("/trades")
-    public List<Trade> getTrades() {
-        tradeService.getAllTrades();
-
-        return tradeService.getAllTrades();
+    @GetMapping("/counterparties")
+    public List<Counterparty> getCounterparties() {
+        return repo.findAll();
     }
 
-    @GetMapping("/trade/{name}")
-    public ResponseEntity<Trade> getTrade(@PathVariable String name) {
-        tradeService.getAllTrades();
-        Optional<Trade> opTrade = tradeService.getTrade(name);
-
-        return tradeService.getTrade(name).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.noContent().build());
+    @GetMapping("/counterparty/{name}")
+    public ResponseEntity<Counterparty> getCounterparty(@PathVariable String name) {
+        List<Counterparty> opTrade = repo.findByName(name);
+        return opTrade.size() == 1 ? new ResponseEntity<>(opTrade.getFirst(), HttpStatus.OK) : ResponseEntity.noContent().build();
     }
 
 }

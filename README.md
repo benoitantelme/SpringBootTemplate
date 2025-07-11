@@ -4,7 +4,7 @@ Template for spring boot web application.
 
 ## Description
 
-Using latest versions (hopefully), with APIs, security (to be extended with oauth2 ...), actuators, Open API, async.
+Using latest versions (hopefully), with APIs, embedded DB, JPA, security (to be extended with oauth2 ...), actuators, Open API, async.
 
 ## Getting Started
 
@@ -55,6 +55,13 @@ Using latest versions (hopefully), with APIs, security (to be extended with oaut
 * Using h2 embedded db as trades repository
 * Scripts in resources/db/sql
 * name varchar(50) | counterparty varchar(50) | amount decimal | currency varchar(3)
+* Controller for get and getAll
+
+
+### Counterparty repo and controller
+
+* Using h2 embedded db as previously
+* Using JPA
 * Controller for get and getAll
 
 
