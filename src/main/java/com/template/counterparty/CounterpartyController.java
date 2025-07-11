@@ -18,11 +18,16 @@ public class TradeController {
 
     @GetMapping("/trades")
     public List<Trade> getTrades() {
+        tradeService.getAllTrades();
+
         return tradeService.getAllTrades();
     }
 
     @GetMapping("/trade/{name}")
     public ResponseEntity<Trade> getTrade(@PathVariable String name) {
+        tradeService.getAllTrades();
+        Optional<Trade> opTrade = tradeService.getTrade(name);
+
         return tradeService.getTrade(name).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.noContent().build());
     }
 
