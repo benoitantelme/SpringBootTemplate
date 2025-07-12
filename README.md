@@ -4,7 +4,7 @@ Template for spring boot web application.
 
 ## Description
 
-Using latest versions (hopefully), with APIs, embedded DB, JPA, security (to be extended with oauth2 ...), actuators, Open API, async.
+Using latest versions (hopefully), with APIs, embedded DB, JPA, security (to be extended with oauth2 ...), actuators, Open API, async, spotless.
 
 ## Getting Started
 
@@ -34,10 +34,16 @@ Using latest versions (hopefully), with APIs, embedded DB, JPA, security (to be 
 * ```java -cp YourJar.jar com.template.Application```
 
 
-### Maven versions plugins
+### Maven versions plugin
 
 * Allows to check if dependencies are up to date
 * ```mvn versions:display-dependency-updates```
+
+
+### Maven spotless plugin
+
+* Allows to format all project files
+* ```mvn spotless::apply```
 
 
 ## APIs

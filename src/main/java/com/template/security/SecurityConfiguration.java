@@ -11,41 +11,28 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                // hello is open
-                .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/hello").permitAll()
-                )
-                .authorizeHttpRequests((requests) -> requests
-                        .anyRequest().authenticated()
-                )
-                .formLogin((form) -> form
-                        .loginPage("/login")
-                        .permitAll()
-                )
-                .logout(LogoutConfigurer::permitAll);
+  @Bean
+  public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    http
+        // hello is open
+        .authorizeHttpRequests((requests) -> requests.requestMatchers("/hello").permitAll())
+        .authorizeHttpRequests((requests) -> requests.anyRequest().authenticated())
+        .formLogin((form) -> form.loginPage("/login").permitAll())
+        .logout(LogoutConfigurer::permitAll);
 
-        return http.build();
-    }
+    return http.build();
+  }
 
-    @Bean
-    public UserDetailsService userDetailsService() {
-        UserDetails user =
-                //    TODO: encoding
-                User.withDefaultPasswordEncoder()
-                        .username("user")
-                        .password("user")
-                        .roles("USER")
-                        .build();
+  @Bean
+  public UserDetailsService userDetailsService() {
+    UserDetails user =
+        //    TODO: encoding
+        User.withDefaultPasswordEncoder().username("user").password("user").roles("USER").build();
 
-        return new InMemoryUserDetailsManager(user);
-    }
-
+    return new InMemoryUserDetailsManager(user);
+  }
 }

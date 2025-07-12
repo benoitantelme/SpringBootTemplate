@@ -8,19 +8,19 @@ import org.springframework.stereotype.Service;
 @Service
 public class SlowTaskService {
 
-    Logger logger = LoggerFactory.getLogger(SlowTaskService.class);
+  Logger logger = LoggerFactory.getLogger(SlowTaskService.class);
 
-    @Async
-    public void processAsynchronously() {
-        slowProcess();
-        logger.info("Processing done in the background!");
-    }
+  @Async
+  public void processAsynchronously() {
+    slowProcess();
+    logger.info("Processing done in the background!");
+  }
 
-    private void slowProcess() {
-        try {
-            Thread.sleep(5000); // Simulates a 5-second delay
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-        }
+  private void slowProcess() {
+    try {
+      Thread.sleep(5000); // Simulates a 5-second delay
+    } catch (InterruptedException e) {
+      Thread.currentThread().interrupt();
     }
+  }
 }

@@ -1,5 +1,6 @@
 package com.template.trades;
 
+import static org.junit.jupiter.api.Assertions.*;
 
 import com.template.trades.model.Currency;
 import com.template.trades.model.Trade;
@@ -7,56 +8,52 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 public class TradeServiceTest {
 
-    @Autowired
-    TradeService tradeService;
+  @Autowired TradeService tradeService;
 
-    @Test
-    void getTrades() {
-        Trade t1 = new Trade("SWAP", "BNP", 280.000d, Currency.EUR);
-        Trade t2 = new Trade("BOND", "HSBC", 52640.000d, Currency.GBP);
-        tradeService.createTrade(t1);
-        tradeService.createTrade(t2);
+  @Test
+  void getTrades() {
+    Trade t1 = new Trade("SWAP", "BNP", 280.000d, Currency.EUR);
+    Trade t2 = new Trade("BOND", "HSBC", 52640.000d, Currency.GBP);
+    tradeService.createTrade(t1);
+    tradeService.createTrade(t2);
 
-        var result = tradeService.getAllTrades();
+    var result = tradeService.getAllTrades();
 
-        assertNotNull(result);
-        assertFalse(result.isEmpty());
-        assertEquals(4, result.size());
+    assertNotNull(result);
+    assertFalse(result.isEmpty());
+    assertEquals(4, result.size());
 
-        Trade savedT1 = result.get(2);
-        Trade savedT2 = result.get(3);
+    Trade savedT1 = result.get(2);
+    Trade savedT2 = result.get(3);
 
-        assertEquals(t1.getName(), savedT1.getName());
-        assertEquals(t1.getAmount(), savedT1.getAmount());
-        assertEquals(t1.getCounterparty(), savedT1.getCounterparty());
-        assertEquals(t1.getCurrency(), savedT1.getCurrency());
+    assertEquals(t1.getName(), savedT1.getName());
+    assertEquals(t1.getAmount(), savedT1.getAmount());
+    assertEquals(t1.getCounterparty(), savedT1.getCounterparty());
+    assertEquals(t1.getCurrency(), savedT1.getCurrency());
 
-        assertNotNull(savedT2.getName());
-        assertEquals(t2.getName(), savedT2.getName());
-        assertEquals(t2.getAmount(), savedT2.getAmount());
-        assertEquals(t2.getCounterparty(), savedT2.getCounterparty());
-        assertEquals(t2.getCurrency(), savedT2.getCurrency());
-    }
+    assertNotNull(savedT2.getName());
+    assertEquals(t2.getName(), savedT2.getName());
+    assertEquals(t2.getAmount(), savedT2.getAmount());
+    assertEquals(t2.getCounterparty(), savedT2.getCounterparty());
+    assertEquals(t2.getCurrency(), savedT2.getCurrency());
+  }
 
-    @Test
-    void getTrade() {
-        Trade t1 = new Trade("testtrade", "AAA", 11d, Currency.EUR);
-        tradeService.createTrade(t1);
+  @Test
+  void getTrade() {
+    Trade t1 = new Trade("testtrade", "AAA", 11d, Currency.EUR);
+    tradeService.createTrade(t1);
 
-        var result = tradeService.getTrade("testtrade");
-        assertNotNull(result);
-        assertTrue(result.isPresent());
+    var result = tradeService.getTrade("testtrade");
+    assertNotNull(result);
+    assertTrue(result.isPresent());
 
-        var trade = result.get();
-        assertEquals(t1.getName(), trade.getName());
-        assertEquals(t1.getAmount(), trade.getAmount());
-        assertEquals(t1.getCounterparty(), trade.getCounterparty());
-        assertEquals(t1.getCurrency(), trade.getCurrency());
-    }
-
+    var trade = result.get();
+    assertEquals(t1.getName(), trade.getName());
+    assertEquals(t1.getAmount(), trade.getAmount());
+    assertEquals(t1.getCounterparty(), trade.getCounterparty());
+    assertEquals(t1.getCurrency(), trade.getCurrency());
+  }
 }
