@@ -4,10 +4,9 @@ import com.template.counterparties.model.Counterparty;
 import com.template.counterparties.service.CounterpartyService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class CounterpartyController {
@@ -16,14 +15,20 @@ public class CounterpartyController {
 
   @GetMapping("/counterparties")
   public List<Counterparty> getCounterparties() {
-    return counterpartyService.getCounterparties();
+    return counterpartyService.findCounterparties();
   }
 
   @GetMapping("/counterparty/{name}")
   public ResponseEntity<Counterparty> getCounterparty(@PathVariable String name) {
     return counterpartyService
-        .getCounterparty(name)
+        .findCounterparty(name)
         .map(ResponseEntity::ok)
         .orElseGet(() -> ResponseEntity.noContent().build());
+  }
+
+  @PostMapping(value = "/counterparty", consumes = "application/json")
+  public ResponseEntity<Counterparty> postCounterparty(@RequestBody Counterparty counterparty) {
+    Counterparty returnedCounterparty = counterpartyService.saveCounterparty(counterparty);
+    return new ResponseEntity<>(returnedCounterparty, HttpStatus.CREATED);
   }
 }

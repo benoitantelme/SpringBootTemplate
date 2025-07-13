@@ -12,15 +12,15 @@ public class CounterpartyService {
 
   @Autowired private CounterpartyRepository tradeRepository;
 
-  public Counterparty postCounterparty(Counterparty counterparty) {
+  public Counterparty saveCounterparty(Counterparty counterparty) {
     return tradeRepository.save(counterparty);
   }
 
-  public Optional<Counterparty> getCounterparty(String counterparty) {
+  public Optional<Counterparty> findCounterparty(String counterparty) {
     return tradeRepository.findByName(counterparty);
   }
 
-  public List<Counterparty> getCounterparties() {
+  public List<Counterparty> findCounterparties() {
     return tradeRepository.findAll();
   }
 }
