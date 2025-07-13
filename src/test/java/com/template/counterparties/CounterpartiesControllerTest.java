@@ -1,4 +1,4 @@
-package com.template.counterparty;
+package com.template.counterparties;
 
 import static org.hamcrest.core.Is.is;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;

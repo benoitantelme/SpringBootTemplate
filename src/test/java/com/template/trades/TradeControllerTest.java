@@ -5,7 +5,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.template.trades.model.Currency;
 import com.template.trades.model.Trade;
-import com.template.trades.repository.TradeRepository;
+import com.template.trades.service.TradeService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -18,7 +18,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 @SpringBootTest
 @AutoConfigureMockMvc
 public class TradeControllerTest {
-  @Autowired public TradeRepository tradeRepository;
+  @Autowired public TradeService tradeService;
   ;
 
   @Autowired private MockMvc mvc;
@@ -36,7 +36,7 @@ public class TradeControllerTest {
   public void getTrade() throws Exception {
     String TESTTRADE = "testtrade";
     Trade t1 = new Trade(TESTTRADE, "AAA", 11d, Currency.EUR);
-    tradeRepository.save(t1);
+    tradeService.postTrade(t1);
 
     mvc.perform(
             MockMvcRequestBuilders.get("/trade/" + TESTTRADE).accept(MediaType.APPLICATION_JSON))

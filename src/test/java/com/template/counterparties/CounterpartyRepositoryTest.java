@@ -1,10 +1,10 @@
-package com.template.counterparty;
+package com.template.counterparties;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.template.counterparty.model.Counterparty;
-import com.template.counterparty.repository.CounterpartyRepository;
+import com.template.counterparties.model.Counterparty;
+import com.template.counterparties.repository.CounterpartyRepository;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
