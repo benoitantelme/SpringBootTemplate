@@ -3,10 +3,12 @@ package com.template.trades;
 import static org.hamcrest.core.Is.is;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.template.trades.model.Currency;
 import com.template.trades.model.Trade;
-import com.template.trades.service.TradeService;
+import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,9 +19,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@TestMethodOrder(MethodOrderer.MethodName.class)
 public class TradeControllerTest {
-  @Autowired public TradeService tradeService;
-  ;
 
   @Autowired private MockMvc mvc;
 
@@ -34,16 +35,28 @@ public class TradeControllerTest {
   @WithMockUser(roles = "USER", username = "user")
   @Test
   public void getTrade() throws Exception {
-    String TESTTRADE = "testtrade";
-    Trade t1 = new Trade(TESTTRADE, "AAA", 11d, Currency.EUR);
-    tradeService.postTrade(t1);
-
+    String firstName = "FirstTrade";
     mvc.perform(
-            MockMvcRequestBuilders.get("/trade/" + TESTTRADE).accept(MediaType.APPLICATION_JSON))
+            MockMvcRequestBuilders.get("/trade/" + firstName).accept(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk())
-        .andExpect(jsonPath("$.name", is(t1.getName()))) // is(<Object>) is e.g. a Hamcrest Matcher
-        .andExpect(jsonPath("$.counterparty", is(t1.getCounterparty())))
-        .andExpect(jsonPath("$.amount", is(t1.getAmount())))
-        .andExpect(jsonPath("$.currency", is(t1.getCurrency().toString())));
+        .andExpect(jsonPath("$.name", is(firstName)));
+  }
+
+  @WithMockUser(roles = "USER", username = "user")
+  @Test
+  public void postTrade() throws Exception {
+    String THIRD = "ThirdTrade";
+    String BNP = "BNP";
+    Trade trade = new Trade(THIRD, BNP, 111, Currency.EUR);
+    mvc.perform(
+            MockMvcRequestBuilders.post("/trade")
+                .content(new ObjectMapper().writeValueAsString(trade))
+                .contentType(MediaType.APPLICATION_JSON))
+        .andExpect(status().isCreated());
+
+    mvc.perform(MockMvcRequestBuilders.get("/trade/" + THIRD).accept(MediaType.APPLICATION_JSON))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.name", is(THIRD)))
+        .andExpect(jsonPath("$.counterparty", is(BNP)));
   }
 }

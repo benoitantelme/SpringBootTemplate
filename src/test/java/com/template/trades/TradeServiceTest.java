@@ -4,24 +4,24 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import com.template.trades.model.Currency;
 import com.template.trades.model.Trade;
-import com.template.trades.repository.TradeRepository;
+import com.template.trades.service.TradeService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class TradeRepositoryTest {
+public class TradeServiceTest {
 
-  @Autowired TradeRepository tradeRepository;
+  @Autowired TradeService tradeService;
 
   @Test
   void getTrades() {
     Trade t1 = new Trade("SWAP", "BNP", 280.000d, Currency.EUR);
     Trade t2 = new Trade("BOND", "HSBC", 52640.000d, Currency.GBP);
-    tradeRepository.save(t1);
-    tradeRepository.save(t2);
+    tradeService.saveTrade(t1);
+    tradeService.saveTrade(t2);
 
-    var result = tradeRepository.findAll();
+    var result = tradeService.findTrades();
 
     assertNotNull(result);
     assertFalse(result.isEmpty());
@@ -45,9 +45,9 @@ public class TradeRepositoryTest {
   @Test
   void getTrade() {
     Trade t1 = new Trade("testtrade", "AAA", 11d, Currency.EUR);
-    tradeRepository.save(t1);
+    tradeService.saveTrade(t1);
 
-    var result = tradeRepository.findByName("testtrade");
+    var result = tradeService.findTrade("testtrade");
     assertNotNull(result);
     assertTrue(result.isPresent());
 

@@ -12,15 +12,15 @@ public class TradeService {
 
   @Autowired private TradeRepository tradeRepository;
 
-  public Trade postTrade(Trade trade) {
+  public Trade saveTrade(Trade trade) {
     return tradeRepository.save(trade);
   }
 
-  public Optional<Trade> getTrade(String trade) {
+  public Optional<Trade> findTrade(String trade) {
     return tradeRepository.findByName(trade);
   }
 
-  public List<Trade> getTrades() {
+  public List<Trade> findTrades() {
     return tradeRepository.findAll();
   }
 }
