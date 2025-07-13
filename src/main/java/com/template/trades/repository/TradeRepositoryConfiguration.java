@@ -13,8 +13,8 @@ public class TradeRepositoryConfiguration {
   public CommandLineRunner tradeDbSetup(TradeRepository repository) {
     return (args) -> {
       // initial trades
-      repository.save(new Trade("First Trade", "BNP", 280000, Currency.EUR));
-      repository.save(new Trade("'Second Trade' Trade", "'HSBC'", 52640000, Currency.GBP));
+      repository.save(new Trade("FirstTrade", "BNP", 280000, Currency.EUR));
+      repository.save(new Trade("'SecondTrade", "'HSBC'", 52640000, Currency.GBP));
     };
   }
 }

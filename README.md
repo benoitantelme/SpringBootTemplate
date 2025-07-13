@@ -60,6 +60,10 @@ Using latest versions (hopefully), with APIs, embedded DB, JPA, security (to be 
 
 * Using h2 embedded db and Spring data JPA
 * Controllers for get and getAll
+* http://localhost:8080/trades
+* http://localhost:8080/trade/{id}
+* http://localhost:8080/counterparties
+* http://localhost:8080/counterparty/{id}
 
 
 ### Beans service
