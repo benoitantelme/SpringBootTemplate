@@ -4,7 +4,6 @@ import com.template.counterparty.db.CounterpartyRepository;
 import com.template.counterparty.model.Counterparty;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,18 +12,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CounterpartyController {
 
-  @Autowired CounterpartyRepository repo;
+  @Autowired CounterpartyRepository counterpartyRepository;
 
   @GetMapping("/counterparties")
   public List<Counterparty> getCounterparties() {
-    return repo.findAll();
+    return counterpartyRepository.findAll();
   }
 
   @GetMapping("/counterparty/{name}")
   public ResponseEntity<Counterparty> getCounterparty(@PathVariable String name) {
-    List<Counterparty> opTrade = repo.findByName(name);
-    return opTrade.size() == 1
-        ? new ResponseEntity<>(opTrade.getFirst(), HttpStatus.OK)
-        : ResponseEntity.noContent().build();
+    return counterpartyRepository.findByName(name)
+            .map(ResponseEntity::ok)
+            .orElseGet(() -> ResponseEntity.noContent().build());
   }
 }

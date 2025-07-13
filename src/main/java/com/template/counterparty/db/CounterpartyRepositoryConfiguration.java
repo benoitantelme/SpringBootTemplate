@@ -13,7 +13,7 @@ public class CounterpartyRepositoryConfiguration {
   Logger logger = LoggerFactory.getLogger(CounterpartyRepositoryConfiguration.class);
 
   @Bean
-  public CommandLineRunner demo(CounterpartyRepository repository) {
+  public CommandLineRunner counterpartyRepositorySetup(CounterpartyRepository repository) {
     return (args) -> {
       // initial cpties
       repository.save(new Counterparty("HSBC"));
