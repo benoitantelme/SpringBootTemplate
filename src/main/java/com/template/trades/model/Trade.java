@@ -5,13 +5,13 @@ import jakarta.persistence.*;
 @Entity
 public class Trade {
 
-  @Id @Column private String name;
+  @Id private String name;
 
-  @Column private String counterparty;
+  private String counterparty;
 
-  @Column private Double amount;
+  private Double amount;
 
-  @Column private Currency currency;
+  private Currency currency;
 
   public Trade(String name, String counterparty, double amount, Currency currency) {
     this.name = name;

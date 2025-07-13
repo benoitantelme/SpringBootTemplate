@@ -1,5 +1,6 @@
 package com.template.trades;
 
+import com.template.trades.db.TradeRepository;
 import com.template.trades.model.Trade;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,17 +12,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TradeController {
 
-  @Autowired TradeService tradeService;
+  @Autowired
+  TradeRepository tradeRepository;
 
   @GetMapping("/trades")
   public List<Trade> getTrades() {
-    return tradeService.getAllTrades();
+    return tradeRepository.findAll();
   }
 
   @GetMapping("/trade/{name}")
   public ResponseEntity<Trade> getTrade(@PathVariable String name) {
-    return tradeService
-        .getTrade(name)
+    return tradeRepository
+        .findByName(name)
         .map(ResponseEntity::ok)
         .orElseGet(() -> ResponseEntity.noContent().build());
   }
