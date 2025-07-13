@@ -2,9 +2,9 @@ package com.template.trades;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.template.trades.db.TradeRepository;
 import com.template.trades.model.Currency;
 import com.template.trades.model.Trade;
+import com.template.trades.repository.TradeRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,8 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class TradeServiceTest {
 
-  @Autowired
-  TradeRepository tradeRepository;
+  @Autowired TradeRepository tradeRepository;
 
   @Test
   void getTrades() {

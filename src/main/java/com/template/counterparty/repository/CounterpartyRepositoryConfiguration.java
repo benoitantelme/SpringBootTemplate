@@ -1,4 +1,4 @@
-package com.template.counterparty.db;
+package com.template.counterparty.repository;
 
 import com.template.counterparty.model.Counterparty;
 import org.slf4j.Logger;

@@ -1,18 +1,18 @@
-//package com.template.trades;
+// package com.template.trades;
 //
-//import com.template.trades.db.TradeRepository;
-//import com.template.trades.model.Trade;
-//import org.junit.jupiter.api.Test;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.test.context.SpringBootTest;
+// import com.template.trades.db.TradeRepository;
+// import com.template.trades.model.Trade;
+// import org.junit.jupiter.api.Test;
+// import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.boot.test.context.SpringBootTest;
 //
-//import java.util.Optional;
+// import java.util.Optional;
 //
-//import static org.junit.jupiter.api.Assertions.assertEquals;
-//import static org.junit.jupiter.api.Assertions.assertTrue;
+// import static org.junit.jupiter.api.Assertions.assertEquals;
+// import static org.junit.jupiter.api.Assertions.assertTrue;
 //
-//@SpringBootTest()
-//public class TradeRepositoryTest {
+// @SpringBootTest()
+// public class TradeRepositoryTest {
 //
 //  @Autowired
 //  TradeRepository tradeRepository;
@@ -26,4 +26,4 @@
 //    Trade t = result.get();
 //    assertEquals("BNP", t.getName());
 //  }
-//}
+// }

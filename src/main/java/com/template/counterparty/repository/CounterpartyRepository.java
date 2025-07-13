@@ -1,9 +1,8 @@
-package com.template.counterparty.db;
+package com.template.counterparty.repository;
 
 import com.template.counterparty.model.Counterparty;
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.data.repository.CrudRepository;
 
 public interface CounterpartyRepository extends CrudRepository<Counterparty, Long> {

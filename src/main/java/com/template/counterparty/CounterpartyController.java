@@ -1,7 +1,7 @@
 package com.template.counterparty;
 
-import com.template.counterparty.db.CounterpartyRepository;
 import com.template.counterparty.model.Counterparty;
+import com.template.counterparty.repository.CounterpartyRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +21,9 @@ public class CounterpartyController {
 
   @GetMapping("/counterparty/{name}")
   public ResponseEntity<Counterparty> getCounterparty(@PathVariable String name) {
-    return counterpartyRepository.findByName(name)
-            .map(ResponseEntity::ok)
-            .orElseGet(() -> ResponseEntity.noContent().build());
+    return counterpartyRepository
+        .findByName(name)
+        .map(ResponseEntity::ok)
+        .orElseGet(() -> ResponseEntity.noContent().build());
   }
 }

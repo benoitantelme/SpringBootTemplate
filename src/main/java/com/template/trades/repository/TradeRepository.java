@@ -1,10 +1,9 @@
-package com.template.trades.db;
+package com.template.trades.repository;
 
 import com.template.trades.model.Trade;
-import org.springframework.data.repository.CrudRepository;
-
 import java.util.List;
 import java.util.Optional;
+import org.springframework.data.repository.CrudRepository;
 
 public interface TradeRepository extends CrudRepository<Trade, Long> {
 

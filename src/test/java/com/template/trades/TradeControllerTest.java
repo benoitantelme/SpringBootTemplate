@@ -3,9 +3,9 @@ package com.template.trades;
 import static org.hamcrest.core.Is.is;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import com.template.trades.db.TradeRepository;
 import com.template.trades.model.Currency;
 import com.template.trades.model.Trade;
+import com.template.trades.repository.TradeRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
