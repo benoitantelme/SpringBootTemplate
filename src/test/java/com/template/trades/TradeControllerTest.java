@@ -4,6 +4,7 @@ import static org.hamcrest.core.Is.is;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.template.counterparties.model.Counterparty;
 import com.template.trades.model.Currency;
 import com.template.trades.model.Trade;
 import org.junit.jupiter.api.MethodOrderer;
@@ -47,7 +48,7 @@ public class TradeControllerTest {
   public void postTrade() throws Exception {
     String THIRD = "ThirdTrade";
     String BNP = "BNP";
-    Trade trade = new Trade(THIRD, BNP, 111, Currency.EUR);
+    Trade trade = new Trade(THIRD, new Counterparty(BNP), 111, Currency.EUR);
     mvc.perform(
             MockMvcRequestBuilders.post("/trade")
                 .content(new ObjectMapper().writeValueAsString(trade))

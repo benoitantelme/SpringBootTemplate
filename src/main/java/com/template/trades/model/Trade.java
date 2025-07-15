@@ -1,19 +1,23 @@
 package com.template.trades.model;
 
+import com.template.counterparties.model.Counterparty;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "trade")
 public class Trade {
 
   @Id private String name;
 
-  private String counterparty;
+  @ManyToOne(cascade = CascadeType.PERSIST)
+  @JoinColumn(name = "counterparty.id")
+  private Counterparty counterparty;
 
   private Double amount;
 
   private Currency currency;
 
-  public Trade(String name, String counterparty, double amount, Currency currency) {
+  public Trade(String name, Counterparty counterparty, double amount, Currency currency) {
     this.name = name;
     this.counterparty = counterparty;
     this.amount = amount;
@@ -30,11 +34,11 @@ public class Trade {
     this.name = name;
   }
 
-  public String getCounterparty() {
+  public Counterparty getCounterparty() {
     return counterparty;
   }
 
-  public void setCounterparty(String counterparty) {
+  public void setCounterparty(Counterparty counterparty) {
     this.counterparty = counterparty;
   }
 

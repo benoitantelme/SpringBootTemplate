@@ -2,6 +2,7 @@ package com.template.trades;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.template.counterparties.model.Counterparty;
 import com.template.trades.model.Currency;
 import com.template.trades.model.Trade;
 import com.template.trades.service.TradeService;
@@ -16,8 +17,8 @@ public class TradeServiceTest {
 
   @Test
   void getTrades() {
-    Trade t1 = new Trade("SWAP", "BNP", 280.000d, Currency.EUR);
-    Trade t2 = new Trade("BOND", "HSBC", 52640.000d, Currency.GBP);
+    Trade t1 = new Trade("SWAP", new Counterparty("BNP"), 280.000d, Currency.EUR);
+    Trade t2 = new Trade("BOND", new Counterparty("HSBC"), 52640.000d, Currency.GBP);
     tradeService.saveTrade(t1);
     tradeService.saveTrade(t2);
 
@@ -44,7 +45,7 @@ public class TradeServiceTest {
 
   @Test
   void getTrade() {
-    Trade t1 = new Trade("testtrade", "AAA", 11d, Currency.EUR);
+    Trade t1 = new Trade("testtrade", new Counterparty("AAA"), 11d, Currency.EUR);
     tradeService.saveTrade(t1);
 
     var result = tradeService.findTrade("testtrade");

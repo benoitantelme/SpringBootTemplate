@@ -1,11 +1,12 @@
 package com.template.counterparties.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.template.trades.model.Trade;
+import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
+@Table(name = "counterparty")
 public class Counterparty {
 
   @Id
@@ -14,10 +15,19 @@ public class Counterparty {
 
   private String name;
 
+  @OneToMany(mappedBy = "counterparty", cascade = CascadeType.ALL)
+  private List<Trade> trades;
+
   public Counterparty() {}
 
   public Counterparty(String name) {
     this.name = name;
+    this.trades = new ArrayList<>();
+  }
+
+  public Counterparty(String name, List<Trade> trades) {
+    this.name = name;
+    this.trades = trades;
   }
 
   public String getName() {
@@ -34,5 +44,13 @@ public class Counterparty {
 
   public void setId(Long id) {
     this.id = id;
+  }
+
+  public List<Trade> getTrades() {
+    return trades;
+  }
+
+  public void setTrades(List<Trade> trades) {
+    this.trades = trades;
   }
 }
