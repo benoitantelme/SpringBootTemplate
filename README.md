@@ -10,13 +10,9 @@ Using latest versions (hopefully), with APIs, embedded DB, JPA, security (to be 
 
 ### Dependencies
 
-* spring-boot-starter-parent
-* spring-boot-starter-web
-* spring-boot-starter-actuator
-* spring-boot-starter-security
+* spring-boot-starter-parent|web|actuator|security|data-jpa|test
 * thymeleaf-extras-springsecurity6
-* spring-boot-starter-test
-* spring-security-test
+* h2
 * junit
 
 ### Installing
