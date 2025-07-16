@@ -6,6 +6,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.template.counterparties.model.Counterparty;
+import com.template.counterparties.service.CounterpartyService;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -23,6 +24,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 public class CounterpartiesControllerTest {
 
   @Autowired private MockMvc mvc;
+
+  @Autowired private CounterpartyService counterpartyService;
 
   @WithMockUser(roles = "USER", username = "user")
   @Test
@@ -57,5 +60,7 @@ public class CounterpartiesControllerTest {
             MockMvcRequestBuilders.get("/counterparty/" + TEST).accept(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.name", is(TEST)));
+
+    counterpartyService.deleteCounterparty(cpty);
   }
 }

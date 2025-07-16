@@ -5,6 +5,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.template.counterparties.model.Counterparty;
+import com.template.counterparties.service.CounterpartyService;
 import com.template.trades.model.Currency;
 import com.template.trades.model.Trade;
 import org.junit.jupiter.api.MethodOrderer;
@@ -24,6 +25,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 public class TradeControllerTest {
 
   @Autowired private MockMvc mvc;
+
+  @Autowired private CounterpartyService counterpartyService;
 
   @WithMockUser(roles = "USER", username = "user")
   @Test
@@ -47,8 +50,9 @@ public class TradeControllerTest {
   @Test
   public void postTrade() throws Exception {
     String THIRD = "ThirdTrade";
-    String BNP = "BNP";
-    Trade trade = new Trade(THIRD, new Counterparty(BNP), 111, Currency.EUR);
+    Counterparty bnp = counterpartyService.getOrCreate("BNP");
+    Trade trade = new Trade(THIRD, bnp, 111, Currency.EUR);
+
     mvc.perform(
             MockMvcRequestBuilders.post("/trade")
                 .content(new ObjectMapper().writeValueAsString(trade))
@@ -58,6 +62,6 @@ public class TradeControllerTest {
     mvc.perform(MockMvcRequestBuilders.get("/trade/" + THIRD).accept(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.name", is(THIRD)))
-        .andExpect(jsonPath("$.counterparty", is(BNP)));
+        .andExpect(jsonPath("$.counterparty.name", is(bnp.getName())));
   }
 }

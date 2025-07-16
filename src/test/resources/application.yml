@@ -19,3 +19,8 @@ management:
         include: health, info, metrics, beans, env, configprops
   security:
     enabled: true
+
+spring:
+  jackson:
+    serialization:
+      fail-on-empty-beans: false

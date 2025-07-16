@@ -9,7 +9,7 @@ public class Trade {
 
   @Id private String name;
 
-  @ManyToOne(cascade = CascadeType.PERSIST)
+  @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
   @JoinColumn(name = "counterparty.id")
   private Counterparty counterparty;
 

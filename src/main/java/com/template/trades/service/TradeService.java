@@ -12,6 +12,11 @@ public class TradeService {
 
   @Autowired private TradeRepository tradeRepository;
 
+  public void deleteTrade(Trade trade) {
+    Optional<Trade> existingTrade = tradeRepository.findByName(trade.getName());
+    existingTrade.ifPresent(value -> tradeRepository.delete(value));
+  }
+
   public Trade saveTrade(Trade trade) {
     return tradeRepository.save(trade);
   }

@@ -29,10 +29,11 @@ public class CounterpartyServiceTest {
   }
 
   @Test
-  public void testPost() {
+  public void testSave() {
     Counterparty cpty = new Counterparty("Test");
     Counterparty result = service.saveCounterparty(cpty);
     assertNotNull(result);
     assertEquals(cpty.getName(), result.getName());
+    service.deleteCounterparty(result);
   }
 }

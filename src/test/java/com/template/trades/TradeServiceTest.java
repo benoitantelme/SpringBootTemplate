@@ -3,6 +3,7 @@ package com.template.trades;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.template.counterparties.model.Counterparty;
+import com.template.counterparties.service.CounterpartyService;
 import com.template.trades.model.Currency;
 import com.template.trades.model.Trade;
 import com.template.trades.service.TradeService;
@@ -15,10 +16,15 @@ public class TradeServiceTest {
 
   @Autowired TradeService tradeService;
 
+  @Autowired CounterpartyService counterpartyService;
+
   @Test
   void getTrades() {
-    Trade t1 = new Trade("SWAP", new Counterparty("BNP"), 280.000d, Currency.EUR);
-    Trade t2 = new Trade("BOND", new Counterparty("HSBC"), 52640.000d, Currency.GBP);
+    Counterparty bnp = counterpartyService.getOrCreate("BNP");
+    Counterparty hsbc = counterpartyService.getOrCreate("HSBC");
+
+    Trade t1 = new Trade("SWAP", bnp, 280.000d, Currency.EUR);
+    Trade t2 = new Trade("BOND", hsbc, 52640.000d, Currency.GBP);
     tradeService.saveTrade(t1);
     tradeService.saveTrade(t2);
 
@@ -33,19 +39,21 @@ public class TradeServiceTest {
 
     assertEquals(t1.getName(), savedT1.getName());
     assertEquals(t1.getAmount(), savedT1.getAmount());
-    assertEquals(t1.getCounterparty(), savedT1.getCounterparty());
+    assertEquals(t1.getCounterparty().getName(), savedT1.getCounterparty().getName());
     assertEquals(t1.getCurrency(), savedT1.getCurrency());
 
     assertNotNull(savedT2.getName());
     assertEquals(t2.getName(), savedT2.getName());
     assertEquals(t2.getAmount(), savedT2.getAmount());
-    assertEquals(t2.getCounterparty(), savedT2.getCounterparty());
+    assertEquals(t2.getCounterparty().getName(), savedT2.getCounterparty().getName());
     assertEquals(t2.getCurrency(), savedT2.getCurrency());
   }
 
   @Test
   void getTrade() {
-    Trade t1 = new Trade("testtrade", new Counterparty("AAA"), 11d, Currency.EUR);
+    String aaaString = "aaa";
+    Counterparty aaa = counterpartyService.getOrCreate(aaaString);
+    Trade t1 = new Trade("testtrade", aaa, 11d, Currency.EUR);
     tradeService.saveTrade(t1);
 
     var result = tradeService.findTrade("testtrade");
@@ -55,7 +63,7 @@ public class TradeServiceTest {
     var trade = result.get();
     assertEquals(t1.getName(), trade.getName());
     assertEquals(t1.getAmount(), trade.getAmount());
-    assertEquals(t1.getCounterparty(), trade.getCounterparty());
+    assertEquals(t1.getCounterparty().getName(), trade.getCounterparty().getName());
     assertEquals(t1.getCurrency(), trade.getCurrency());
   }
 }
