@@ -1,5 +1,7 @@
 package com.template.trades.service;
 
+import com.template.counterparties.model.Counterparty;
+import com.template.counterparties.repository.CounterpartyRepository;
 import com.template.trades.model.Trade;
 import com.template.trades.repository.TradeRepository;
 import java.util.List;
@@ -11,13 +13,15 @@ import org.springframework.stereotype.Service;
 public class TradeService {
 
   @Autowired private TradeRepository tradeRepository;
-
-  public void deleteTrade(Trade trade) {
-    Optional<Trade> existingTrade = tradeRepository.findByName(trade.getName());
-    existingTrade.ifPresent(value -> tradeRepository.delete(value));
-  }
+  @Autowired private CounterpartyRepository counterpartyRepository;
 
   public Trade saveTrade(Trade trade) {
+    String counterpartyName = trade.getCounterparty().getName();
+    Counterparty counterparty =
+        counterpartyRepository
+            .findByName(counterpartyName)
+            .orElseGet(() -> counterpartyRepository.save(trade.getCounterparty()));
+    trade.setCounterparty(counterparty);
     return tradeRepository.save(trade);
   }
 

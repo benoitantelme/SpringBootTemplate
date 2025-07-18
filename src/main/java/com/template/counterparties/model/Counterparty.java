@@ -6,11 +6,7 @@ import jakarta.persistence.*;
 @Table(name = "counterparty")
 public class Counterparty {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  private Long id;
-
-  private String name;
+  @Id private String name;
 
   public Counterparty() {}
 
@@ -22,15 +18,7 @@ public class Counterparty {
     return name;
   }
 
-  public Long getId() {
-    return id;
-  }
-
   public void setName(String name) {
     this.name = name;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
   }
 }

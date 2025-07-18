@@ -3,7 +3,6 @@ package com.template.trades;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.template.counterparties.model.Counterparty;
-import com.template.counterparties.service.CounterpartyService;
 import com.template.trades.model.Currency;
 import com.template.trades.model.Trade;
 import com.template.trades.service.TradeService;
@@ -16,12 +15,10 @@ public class TradeServiceTest {
 
   @Autowired TradeService tradeService;
 
-  @Autowired CounterpartyService counterpartyService;
-
   @Test
   void getTrades() {
-    Counterparty bnp = counterpartyService.getOrCreate("BNP");
-    Counterparty hsbc = counterpartyService.getOrCreate("HSBC");
+    Counterparty bnp = new Counterparty("BNP");
+    Counterparty hsbc = new Counterparty("HSBC");
 
     Trade t1 = new Trade("SWAP", bnp, 280.000d, Currency.EUR);
     Trade t2 = new Trade("BOND", hsbc, 52640.000d, Currency.GBP);
@@ -52,7 +49,7 @@ public class TradeServiceTest {
   @Test
   void getTrade() {
     String aaaString = "aaa";
-    Counterparty aaa = counterpartyService.getOrCreate(aaaString);
+    Counterparty aaa = new Counterparty(aaaString);
     Trade t1 = new Trade("testtrade", aaa, 11d, Currency.EUR);
     tradeService.saveTrade(t1);
 

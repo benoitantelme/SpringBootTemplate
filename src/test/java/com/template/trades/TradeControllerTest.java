@@ -5,7 +5,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.template.counterparties.model.Counterparty;
-import com.template.counterparties.service.CounterpartyService;
 import com.template.trades.model.Currency;
 import com.template.trades.model.Trade;
 import org.junit.jupiter.api.MethodOrderer;
@@ -25,8 +24,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 public class TradeControllerTest {
 
   @Autowired private MockMvc mvc;
-
-  @Autowired private CounterpartyService counterpartyService;
 
   @WithMockUser(roles = "USER", username = "user")
   @Test
@@ -50,7 +47,7 @@ public class TradeControllerTest {
   @Test
   public void postTrade() throws Exception {
     String THIRD = "ThirdTrade";
-    Counterparty bnp = counterpartyService.getOrCreate("BNP");
+    Counterparty bnp = new Counterparty("BNP");
     Trade trade = new Trade(THIRD, bnp, 111, Currency.EUR);
 
     mvc.perform(

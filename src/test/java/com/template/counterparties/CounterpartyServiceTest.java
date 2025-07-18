@@ -34,6 +34,5 @@ public class CounterpartyServiceTest {
     Counterparty result = service.saveCounterparty(cpty);
     assertNotNull(result);
     assertEquals(cpty.getName(), result.getName());
-    service.deleteCounterparty(result);
   }
 }

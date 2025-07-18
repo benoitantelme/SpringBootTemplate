@@ -12,29 +12,6 @@ public class CounterpartyService {
 
   @Autowired private CounterpartyRepository counterpartyRepository;
 
-  public Counterparty getOrCreate(String counterpartyName) {
-    return counterpartyRepository
-        .findByName(counterpartyName)
-        .orElse(new Counterparty(counterpartyName));
-  }
-
-  public void updateOrInsert(Counterparty counterparty) {
-    Optional<Counterparty> existingCounterparty =
-        counterpartyRepository.findByName(counterparty.getName());
-    if (existingCounterparty.isPresent()) {
-      // updates, none
-      counterpartyRepository.save(counterparty);
-    } else {
-      counterpartyRepository.save(counterparty);
-    }
-  }
-
-  public void deleteCounterparty(Counterparty counterparty) {
-    Optional<Counterparty> existingCounterparty =
-        counterpartyRepository.findByName(counterparty.getName());
-    existingCounterparty.ifPresent(value -> counterpartyRepository.delete(value));
-  }
-
   public Counterparty saveCounterparty(Counterparty counterparty) {
     return counterpartyRepository.save(counterparty);
   }

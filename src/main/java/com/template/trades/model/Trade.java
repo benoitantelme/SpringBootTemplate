@@ -10,7 +10,6 @@ public class Trade {
   @Id private String name;
 
   @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-  @JoinColumn(name = "counterparty.id")
   private Counterparty counterparty;
 
   private Double amount;

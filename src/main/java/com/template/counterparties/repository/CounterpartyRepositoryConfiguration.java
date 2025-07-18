@@ -14,9 +14,9 @@ public class CounterpartyRepositoryConfiguration {
     return (args) -> {
       // initial cpties
 
-      counterpartyService.updateOrInsert(new Counterparty("HSBC"));
-      counterpartyService.updateOrInsert(new Counterparty("BNP"));
-      counterpartyService.updateOrInsert(new Counterparty("UBS"));
+      counterpartyService.saveCounterparty(new Counterparty("HSBC"));
+      counterpartyService.saveCounterparty(new Counterparty("BNP"));
+      counterpartyService.saveCounterparty(new Counterparty("UBS"));
     };
   }
 }
