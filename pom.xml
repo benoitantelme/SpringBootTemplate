@@ -23,6 +23,7 @@
 
     <modules>
         <module>main-module</module>
+        <module>security</module>
     </modules>
 
     <dependencyManagement>
