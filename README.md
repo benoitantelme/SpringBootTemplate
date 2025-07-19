@@ -4,7 +4,16 @@ Template for spring boot web application.
 
 ## Description
 
-Using latest versions (hopefully), with APIs, embedded DB, JPA, security (to be extended with oauth2 ...), actuators, Open API, async, spotless.
+Using latest versions (hopefully) in a modular way with:
+* APIs
+* embedded DB
+* JPA
+* security (to be extended with oauth2 ...)
+* actuators
+* Open API
+* async
+* spotless
+
 
 ## Getting Started
 
@@ -23,7 +32,7 @@ Using latest versions (hopefully), with APIs, embedded DB, JPA, security (to be 
 
 ### Executing
 
-* Run com.template.Application
+* Run com.template.Application in the main-module
 * ```java com.template.Application```
 
 * Deploy as jar and run
@@ -47,13 +56,14 @@ Using latest versions (hopefully), with APIs, embedded DB, JPA, security (to be 
 
 ### Main entry points
 
+* Managed in the security module
 * Any request will be redirected to the login page, http://localhost:8080/login, so a user can authenticate (basic)
 * Main home for http://localhost:8080/ will be redirected automatically to http://localhost:8080/?continue which corresponds to http://localhost:8080/home
-* http://localhost:8080/beans
 
 
 ### Trade and Book services
 
+* Managed in the main module
 * Using h2 embedded db and Spring data JPA
 * Controllers for get, post and getAll
 * http://localhost:8080/trades
@@ -64,25 +74,29 @@ Using latest versions (hopefully), with APIs, embedded DB, JPA, security (to be 
 * http://localhost:8080/counterparty (POST)
 
 
-### Beans service
-
-* Displays beans instantiated by Spring in the application
-* http://localhost:8080/beans
-
-
 ### Slow service
 
+* Managed in the main module
 * Asynchronous service skeleton simulating a slow response
 * http://localhost:8080/slow
 
 
+### Beans service
+
+* Managed in the main module
+* Displays beans instantiated by Spring in the application
+* http://localhost:8080/beans
+
+
 ### Swagger Open API
 
+* Managed in the main module
 * http://localhost:8080/swagger-ui/index.html
 
 
 ### Actuators
 
+* Managed in the main module
 * http://localhost:8080/actuator
 * http://localhost:8080/actuator/health
 * http://localhost:8080/actuator/env
@@ -101,4 +115,4 @@ Using latest versions (hopefully), with APIs, embedded DB, JPA, security (to be 
 
 ## License
 
-This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details
+This project is licensed under the MIT License - see the LICENSE.md file for details
