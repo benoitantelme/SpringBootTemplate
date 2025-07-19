@@ -19,6 +19,7 @@
 
     <properties>
         <java.version>21</java.version>
+        <project.version>0.1</project.version>
     </properties>
 
     <modules>
