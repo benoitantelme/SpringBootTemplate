@@ -1,0 +1,21 @@
+
+management:
+  server:
+    port: 8080
+  endpoint:
+    health:
+      show-details: always
+      show-components: always
+    metrics:
+      enabled: true
+    env:
+      show-values: WHEN_AUTHORIZED
+      keys-to-sanitize: password,secret
+    configprops:
+      show-values: WHEN_AUTHORIZED
+  endpoints:
+    web:
+      exposure:
+        include: health, info, metrics, beans, env, configprops
+  security:
+    enabled: true

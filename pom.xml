@@ -25,6 +25,7 @@
     <modules>
         <module>main-module</module>
         <module>security</module>
+        <module>admin</module>
     </modules>
 
     <dependencyManagement>
