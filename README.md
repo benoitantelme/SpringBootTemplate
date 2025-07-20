@@ -51,22 +51,26 @@ Using latest versions (hopefully) in a modular way with:
 * ```mvn spotless::apply```
 
 
-## APIs
+## Modules
 
 
-### Main entry points
+### Main module
 
-* Managed in the security module
+* Get all the dependent modules and runs an application
+
+
+### Security module
+
+* Manage the first entry points of the application
 * Any request will be redirected to the login page, http://localhost:8080/login, so a user can authenticate (basic)
 * Main home for http://localhost:8080/ will be redirected automatically to http://localhost:8080/?continue which corresponds to http://localhost:8080/home
 
-### Admin entry points
 
-* Managed in the admin module
+### Admin module
+
+* Managed in the admin related APIs
 * Displays beans instantiated by Spring in the application: http://localhost:8080/beans
 * Displays APIs via Swagger: * http://localhost:8080/swagger-ui/index.html
-
-
 * Displays actuators:
 * * http://localhost:8080/actuator
 * * http://localhost:8080/actuator/health
@@ -74,9 +78,9 @@ Using latest versions (hopefully) in a modular way with:
 * * http://localhost:8080/actuator/configprops
 
 
-### Trade and Book services
+### JPA module
 
-* Managed in the main module
+* Expose the trade and counterparty APIs
 * Using h2 embedded db and Spring data JPA
 * Controllers for get, post and getAll
 * http://localhost:8080/trades
@@ -87,9 +91,9 @@ Using latest versions (hopefully) in a modular way with:
 * http://localhost:8080/counterparty (POST)
 
 
-### Slow service
+### Async module
 
-* Managed in the async module
+* Expose the slow API
 * Asynchronous service skeleton simulating a slow response
 * http://localhost:8080/slow
 
