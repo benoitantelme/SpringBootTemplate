@@ -21,7 +21,7 @@
     </properties>
 
     <dependencies>
-
+        <!--modules-->
         <dependency>
             <groupId>com.example</groupId>
             <artifactId>spring-boot-security-module</artifactId>
@@ -32,7 +32,13 @@
             <artifactId>spring-boot-admin-module</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>spring-boot-async-module</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
+        
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
