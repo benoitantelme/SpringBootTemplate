@@ -89,7 +89,7 @@ Using latest versions (hopefully) in a modular way with:
 
 ### Slow service
 
-* Managed in the main module
+* Managed in the async module
 * Asynchronous service skeleton simulating a slow response
 * http://localhost:8080/slow
 
