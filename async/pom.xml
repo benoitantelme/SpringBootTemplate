@@ -11,10 +11,10 @@
     </parent>
 
     <groupId>com.example</groupId>
-    <artifactId>spring-boot-main-module</artifactId>
+    <artifactId>spring-boot-async-module</artifactId>
     <version>0.1</version>
-    <name>spring boot main module</name>
-    <description>Template main module</description>
+    <name>spring boot async module</name>
+    <description>Template async module</description>
 
     <properties>
         <java.version>21</java.version>
@@ -27,26 +27,11 @@
             <artifactId>spring-boot-security-module</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.example</groupId>
-            <artifactId>spring-boot-admin-module</artifactId>
-            <version>${project.version}</version>
-        </dependency>
+
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
-        <!--   db    -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <scope>runtime</scope>
         </dependency>
 
         <!--   tests    -->
