@@ -1,4 +1,4 @@
-package main.java.com.template.async;
+package com.template.async;
 
 import java.util.concurrent.Executor;
 import org.slf4j.Logger;
