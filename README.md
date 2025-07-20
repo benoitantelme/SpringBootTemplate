@@ -60,6 +60,19 @@ Using latest versions (hopefully) in a modular way with:
 * Any request will be redirected to the login page, http://localhost:8080/login, so a user can authenticate (basic)
 * Main home for http://localhost:8080/ will be redirected automatically to http://localhost:8080/?continue which corresponds to http://localhost:8080/home
 
+### Admin entry points
+
+* Managed in the admin module
+* Displays beans instantiated by Spring in the application: http://localhost:8080/beans
+* Displays APIs via Swagger: * http://localhost:8080/swagger-ui/index.html
+
+
+* Displays actuators:
+* * http://localhost:8080/actuator
+* * http://localhost:8080/actuator/health
+* * http://localhost:8080/actuator/env
+* * http://localhost:8080/actuator/configprops
+
 
 ### Trade and Book services
 
@@ -79,28 +92,6 @@ Using latest versions (hopefully) in a modular way with:
 * Managed in the main module
 * Asynchronous service skeleton simulating a slow response
 * http://localhost:8080/slow
-
-
-### Beans service
-
-* Managed in the main module
-* Displays beans instantiated by Spring in the application
-* http://localhost:8080/beans
-
-
-### Swagger Open API
-
-* Managed in the main module
-* http://localhost:8080/swagger-ui/index.html
-
-
-### Actuators
-
-* Managed in the main module
-* http://localhost:8080/actuator
-* http://localhost:8080/actuator/health
-* http://localhost:8080/actuator/env
-* http://localhost:8080/actuator/configprops
 
 
 ## Authors
