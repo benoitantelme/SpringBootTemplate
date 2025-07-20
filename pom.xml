@@ -27,6 +27,7 @@
         <module>security</module>
         <module>admin</module>
         <module>async</module>
+        <module>jpa</module>
     </modules>
 
     <dependencyManagement>
