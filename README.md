@@ -105,8 +105,8 @@ Using latest versions (hopefully) in a modular way with:
 
 ## Version History
 
-* 0.1
-    * Initial(ly not) Release(d)
+* 1.0
+    * Initial Release
 
 ## License
 

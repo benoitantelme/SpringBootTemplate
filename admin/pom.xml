@@ -12,7 +12,7 @@
 
     <groupId>com.example</groupId>
     <artifactId>spring-boot-admin-module</artifactId>
-    <version>0.1</version>
+    <version>1.0</version>
     <name>spring boot admin module</name>
     <description>Template admin module</description>
 

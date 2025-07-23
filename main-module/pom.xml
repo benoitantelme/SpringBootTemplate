@@ -12,7 +12,7 @@
 
     <groupId>com.example</groupId>
     <artifactId>spring-boot-main-module</artifactId>
-    <version>0.1</version>
+    <version>1.0</version>
     <name>spring boot main module</name>
     <description>Template main module</description>
 
