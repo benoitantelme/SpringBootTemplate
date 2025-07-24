@@ -10,7 +10,6 @@
     </parent>
 
     <artifactId>spring-boot-security-module</artifactId>
-    <version>1.0</version>
     <name>spring boot security module</name>
     <description>Template security module</description>
 
