@@ -7,18 +7,20 @@ import com.template.trades.model.Currency;
 import com.template.trades.model.Trade;
 import com.template.trades.service.TradeService;
 import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-@TestMethodOrder(MethodOrderer.MethodName.class)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class TradeServiceTest {
 
   @Autowired TradeService tradeService;
 
   @Test
+  @Order(1)
   void getTrade() {
     String aaaString = "aaa";
     Counterparty aaa = new Counterparty(aaaString);
@@ -37,6 +39,7 @@ public class TradeServiceTest {
   }
 
   @Test
+  @Order(2)
   void getTrades() {
     Counterparty bnp = new Counterparty("BNP");
     Counterparty hsbc = new Counterparty("HSBC");
