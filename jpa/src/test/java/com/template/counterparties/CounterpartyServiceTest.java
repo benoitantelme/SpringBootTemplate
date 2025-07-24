@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import com.template.counterparties.model.Counterparty;
 import com.template.counterparties.service.CounterpartyService;
-
 import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.MethodOrderer;
@@ -43,7 +42,6 @@ public class CounterpartyServiceTest {
   @Order(3)
   public void testFindAll() {
     List<Counterparty> counterpartyList = service.findCounterparties();
-    counterpartyList.forEach(c -> System.out.println(c.getName()));
     assertEquals(4, counterpartyList.size());
   }
 }

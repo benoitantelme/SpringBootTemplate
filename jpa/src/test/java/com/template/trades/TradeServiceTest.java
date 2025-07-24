@@ -22,9 +22,8 @@ public class TradeServiceTest {
   @Test
   @Order(1)
   void getTrade() {
-    String aaaString = "aaa";
-    Counterparty aaa = new Counterparty(aaaString);
-    Trade t1 = new Trade("testtrade", aaa, 11d, Currency.EUR);
+    Counterparty test = new Counterparty("Test");
+    Trade t1 = new Trade("testtrade", test, 11d, Currency.EUR);
     tradeService.saveTrade(t1);
 
     var result = tradeService.findTrade("testtrade");
