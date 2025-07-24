@@ -1,6 +1,7 @@
 package com.template.counterparties;
 
 import static org.hamcrest.core.Is.is;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -49,6 +50,7 @@ public class CounterpartiesControllerTest {
     Counterparty cpty = new Counterparty(TEST);
     mvc.perform(
             MockMvcRequestBuilders.post("/counterparty")
+                .with(csrf())
                 .content(new ObjectMapper().writeValueAsString(cpty))
                 .contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isCreated());

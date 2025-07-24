@@ -1,6 +1,7 @@
 package com.template.trades;
 
 import static org.hamcrest.core.Is.is;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -52,6 +53,7 @@ public class TradeControllerTest {
 
     mvc.perform(
             MockMvcRequestBuilders.post("/trade")
+                .with(csrf())
                 .content(new ObjectMapper().writeValueAsString(trade))
                 .contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isCreated());

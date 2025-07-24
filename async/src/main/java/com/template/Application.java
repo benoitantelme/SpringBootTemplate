@@ -1,4 +1,4 @@
-package main.java.com.template;
+package com.template;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
