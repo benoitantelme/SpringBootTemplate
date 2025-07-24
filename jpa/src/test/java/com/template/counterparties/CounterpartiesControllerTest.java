@@ -8,6 +8,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.template.counterparties.model.Counterparty;
 import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,21 +21,14 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@TestMethodOrder(MethodOrderer.MethodName.class)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class CounterpartiesControllerTest {
 
   @Autowired private MockMvc mvc;
 
   @WithMockUser(roles = "USER", username = "user")
   @Test
-  public void getCounterparties() throws Exception {
-    mvc.perform(MockMvcRequestBuilders.get("/counterparties").accept(MediaType.APPLICATION_JSON))
-        .andExpect(status().isOk())
-        .andExpect(jsonPath("$.length()", is(3)));
-  }
-
-  @WithMockUser(roles = "USER", username = "user")
-  @Test
+  @Order(1)
   public void getCounterparty() throws Exception {
     String CPTY = "BNP";
     mvc.perform(
@@ -45,6 +39,16 @@ public class CounterpartiesControllerTest {
 
   @WithMockUser(roles = "USER", username = "user")
   @Test
+  @Order(2)
+  public void getCounterparties() throws Exception {
+    mvc.perform(MockMvcRequestBuilders.get("/counterparties").accept(MediaType.APPLICATION_JSON))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.length()", is(3)));
+  }
+
+  @WithMockUser(roles = "USER", username = "user")
+  @Test
+  @Order(3)
   public void postCounterparty() throws Exception {
     String TEST = "Test";
     Counterparty cpty = new Counterparty(TEST);

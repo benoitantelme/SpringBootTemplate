@@ -9,6 +9,7 @@ import com.template.counterparties.model.Counterparty;
 import com.template.trades.model.Currency;
 import com.template.trades.model.Trade;
 import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,21 +22,14 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@TestMethodOrder(MethodOrderer.MethodName.class)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class TradeControllerTest {
 
   @Autowired private MockMvc mvc;
 
   @WithMockUser(roles = "USER", username = "user")
   @Test
-  public void getTrades() throws Exception {
-    mvc.perform(MockMvcRequestBuilders.get("/trades").accept(MediaType.APPLICATION_JSON))
-        .andExpect(status().isOk())
-        .andExpect(jsonPath("$.length()", is(2)));
-  }
-
-  @WithMockUser(roles = "USER", username = "user")
-  @Test
+  @Order(1)
   public void getTrade() throws Exception {
     String firstName = "FirstTrade";
     mvc.perform(
@@ -46,6 +40,16 @@ public class TradeControllerTest {
 
   @WithMockUser(roles = "USER", username = "user")
   @Test
+  @Order(2)
+  public void getTrades() throws Exception {
+    mvc.perform(MockMvcRequestBuilders.get("/trades").accept(MediaType.APPLICATION_JSON))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.length()", is(2)));
+  }
+
+  @WithMockUser(roles = "USER", username = "user")
+  @Test
+  @Order(3)
   public void postTrade() throws Exception {
     String THIRD = "ThirdTrade";
     Counterparty bnp = new Counterparty("BNP");
