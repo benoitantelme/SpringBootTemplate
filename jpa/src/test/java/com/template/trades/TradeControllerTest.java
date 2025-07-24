@@ -1,8 +1,13 @@
 package com.template.trades;
 
 import static org.hamcrest.core.Is.is;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.template.counterparties.model.Counterparty;
+import com.template.trades.model.Currency;
+import com.template.trades.model.Trade;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -42,21 +47,20 @@ public class TradeControllerTest {
   @WithMockUser(roles = "USER", username = "user")
   @Test
   public void postTrade() throws Exception {
-    //    TODO: fix
-    //    String THIRD = "ThirdTrade";
-    //    Counterparty bnp = new Counterparty("BNP");
-    //    Trade trade = new Trade(THIRD, bnp, 111, Currency.EUR);
-    //
-    //    mvc.perform(
-    //            MockMvcRequestBuilders.post("/trade")
-    //                .content(new ObjectMapper().writeValueAsString(trade))
-    //                .contentType(MediaType.APPLICATION_JSON))
-    //        .andExpect(status().isCreated());
-    //
-    //    mvc.perform(MockMvcRequestBuilders.get("/trade/" +
-    // THIRD).accept(MediaType.APPLICATION_JSON))
-    //        .andExpect(status().isOk())
-    //        .andExpect(jsonPath("$.name", is(THIRD)))
-    //        .andExpect(jsonPath("$.counterparty.name", is(bnp.getName())));
+    String THIRD = "ThirdTrade";
+    Counterparty bnp = new Counterparty("BNP");
+    Trade trade = new Trade(THIRD, bnp, 111, Currency.EUR);
+
+    mvc.perform(
+            MockMvcRequestBuilders.post("/trade")
+                .with(csrf())
+                .content(new ObjectMapper().writeValueAsString(trade))
+                .contentType(MediaType.APPLICATION_JSON))
+        .andExpect(status().isCreated());
+
+    mvc.perform(MockMvcRequestBuilders.get("/trade/" + THIRD).accept(MediaType.APPLICATION_JSON))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.name", is(THIRD)))
+        .andExpect(jsonPath("$.counterparty.name", is(bnp.getName())));
   }
 }
