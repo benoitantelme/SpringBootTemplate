@@ -14,8 +14,15 @@ management:
     configprops:
       show-values: WHEN_AUTHORIZED
   endpoints:
+    enabled: true
     web:
+      discovery:
+        enabled: true
       exposure:
         include: health, info, metrics, beans, env, configprops
   security:
     enabled: true
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
