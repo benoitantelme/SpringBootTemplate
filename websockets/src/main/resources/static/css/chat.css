@@ -1,47 +1,48 @@
+/* General dark theme */
 body {
     font-family: Arial, sans-serif;
-    background: #f4f6f8;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    background: #121212; /* Black background */
     margin: 0;
-}
-
-.chat-card {
-    background: white;
-    border-radius: 12px;
     padding: 20px;
-    width: 350px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     display: flex;
     flex-direction: column;
     align-items: center;
+    color: #e0e0e0;
 }
 
-h1 {
+.hidden {
+    display: none;
+}
+
+/* Shared card style (for login and chat forms) */
+.card {
+    background: #1e1e1e; /* Dark grey card */
+    border-radius: 12px;
+    padding: 20px;
+    width: 350px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
     margin-bottom: 20px;
-    font-size: 22px;
-    color: #333;
 }
 
-.nickname-section input,
-#text {
+/* Inputs */
+.card input {
     width: 100%;
     padding: 10px;
     font-size: 14px;
     margin-bottom: 10px;
     border-radius: 6px;
-    border: 1px solid #ccc;
+    border: 1px solid #333;
     outline: none;
+    background: #2c2c2c;
+    color: #fff;
     transition: border-color 0.2s;
 }
 
-.nickname-section input:focus,
-#text:focus {
-    border-color: #007bff;
+.card input:focus {
+    border-color: #0a84ff;
 }
 
+/* Buttons */
 .button-row {
     display: flex;
     justify-content: space-between;
@@ -55,7 +56,7 @@ button {
     padding: 8px 12px;
     border: none;
     border-radius: 6px;
-    background: #007bff;
+    background: #0a84ff;
     color: white;
     font-size: 14px;
     cursor: pointer;
@@ -63,37 +64,71 @@ button {
 }
 
 button:disabled {
-    background: #ccc;
+    background: #555;
     cursor: not-allowed;
 }
 
 button:hover:not(:disabled) {
-    background: #0056b3;
+    background: #0066cc;
 }
 
-.conversation.hidden {
-    display: none;
-}
-
-.message-input {
+/* Chat container below connect form */
+.chat-card {
+    background: #1e1e1e;
+    border-radius: 12px;
+    padding: 20px;
+    width: 350px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
     display: flex;
-    gap: 5px;
-    width: 100%;
-    margin-bottom: 10px;
+    flex-direction: column;
+    gap: 10px;
 }
 
+/* Message box (scrollable chat area) */
 .message-box {
-    border: 1px solid #ccc;
+    border: 1px solid #333;
     border-radius: 6px;
-    background: #fafafa;
+    background: #181818;
     padding: 10px;
     width: 100%;
-    height: 200px;
+    height: 250px;
     overflow-y: auto;
     font-size: 14px;
-    color: #333;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
-.message-box p {
-    margin: 0 0 5px;
+/* Message bubble base */
+.message {
+    max-width: 75%;
+    padding: 8px 12px;
+    border-radius: 18px;
+    font-size: 14px;
+    line-height: 1.4;
+    display: flex;
+    flex-direction: column;
+    margin: 4px 0;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
 }
+
+/* Main user bubble */
+.my-message {
+    align-self: flex-end;
+    background: #0a84ff;
+    color: #fff;
+    border-bottom-right-radius: 4px;
+}
+
+/* Other user bubbles (different dark colors) */
+.other-message {
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+}
+
+/* Color variants for other users */
+.other-message.user-color-1 { background: #3a3a3a; }  /* Dark grey */
+.other-message.user-color-2 { background: #2e3b55; }  /* Dark blue */
+.other-message.user-color-3 { background: #2e553b; }  /* Dark green */
+.other-message.user-color-4 { background: #553a2e; }  /* Dark orange */
+.other-message.user-color-5 { backgroun

@@ -3,11 +3,17 @@ var stompClient = null;
 function setConnected(connected) {
     document.getElementById('connect').disabled = connected;
     document.getElementById('disconnect').disabled = !connected;
-    document.getElementById('conversationDiv').classList.toggle('hidden', !connected);
+
+    // Show/hide chat card
+    const chatCard = document.querySelector('.chat-card');
+    if (connected) {
+        chatCard.classList.remove('hidden');
+    } else {
+        chatCard.classList.add('hidden');
+    }
+
     document.getElementById('response').innerHTML = '';
 }
-
-
 
 function connect() {
     console.log("Connecting to /chat...");
@@ -17,12 +23,11 @@ function connect() {
         debug: function (str) {
             console.log(str);
         },
-        reconnectDelay: 5000, // auto-reconnect every 5s
+        reconnectDelay: 5000,
         onConnect: function (frame) {
             setConnected(true);
             console.log('Connected: ' + frame);
 
-            // Subscribe to topic
             stompClient.subscribe('/topic/messages', function (messageOutput) {
                 showMessageOutput(JSON.parse(messageOutput.body));
             });
@@ -58,10 +63,67 @@ function sendMessage() {
     }
 }
 
+// Map user -> color index
+const userColors = {};
+let nextColorIndex = 1;
+const totalColors = 5;
+
+// Display message with bubbles
 function showMessageOutput(messageOutput) {
     const response = document.getElementById('response');
-    const p = document.createElement('p');
-    p.textContent = `${messageOutput.from}: ${messageOutput.text} (${messageOutput.time})`;
-    response.appendChild(p);
-    response.scrollTop = response.scrollHeight; // auto-scroll
+    const currentUser = document.getElementById('from').value.trim();
+    const username = messageOutput.from?.trim() || "Unknown";
+
+    const messageDiv = document.createElement('div');
+    messageDiv.classList.add('message');
+
+    if (username === currentUser) {
+        // Current user bubble
+        messageDiv.classList.add('my-message');
+
+        const senderSpan = document.createElement('span');
+        senderSpan.textContent = username;
+        senderSpan.style.color = "#ffffff"; // white name on blue bubble
+
+        const textSpan = document.createElement('span');
+        textSpan.textContent = `: ${messageOutput.text}`;
+
+        const timestamp = document.createElement('span');
+        timestamp.classList.add('timestamp');
+        timestamp.textContent = messageOutput.time;
+
+        messageDiv.appendChild(senderSpan);
+        messageDiv.appendChild(textSpan);
+        messageDiv.appendChild(document.createElement('br'));
+        messageDiv.appendChild(timestamp);
+
+    } else {
+        // Assign gray color if new user
+        if (!userColors[username]) {
+            userColors[username] = nextColorIndex;
+            nextColorIndex = (nextColorIndex % totalColors) + 1;
+        }
+        const colorIndex = userColors[username];
+
+        messageDiv.classList.add('other-message', `user-color-${colorIndex}`);
+
+        const senderSpan = document.createElement('span');
+        senderSpan.classList.add(`user-color-${colorIndex}-name`);
+        senderSpan.textContent = username;
+
+        const textSpan = document.createElement('span');
+        textSpan.textContent = `: ${messageOutput.text}`;
+
+        const timestamp = document.createElement('span');
+        timestamp.classList.add('timestamp');
+        timestamp.textContent = messageOutput.time;
+
+        messageDiv.appendChild(senderSpan);
+        messageDiv.appendChild(textSpan);
+        messageDiv.appendChild(document.createElement('br'));
+        messageDiv.appendChild(timestamp);
+    }
+
+    response.appendChild(messageDiv);
+    response.scrollTop = response.scrollHeight;
 }
