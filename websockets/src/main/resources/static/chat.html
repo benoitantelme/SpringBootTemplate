@@ -1,97 +1,40 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Chat WebSocket</title>
+
+    <!-- SockJS and STOMP -->
     <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@5.0.0/bundles/stomp.umd.min.js"></script>
-    <script type="text/javascript">
-        var stompClient = null;
 
-        function setConnected(connected) {
-            document.getElementById('connect').disabled = connected;
-            document.getElementById('disconnect').disabled = !connected;
-            document.getElementById('conversationDiv').style.visibility =
-                connected ? 'visible' : 'hidden';
-            document.getElementById('response').innerHTML = '';
-        }
+    <!-- Custom JS -->
+    <script src="/js/chat.js"></script>
 
-        function connect() {
-            console.log("Connecting to /chat...");
-
-            stompClient = new StompJs.Client({
-                webSocketFactory: () => new SockJS('/chat'),
-                debug: function (str) {
-                    console.log(str);
-                },
-                reconnectDelay: 5000, // auto-reconnect every 5s
-                onConnect: function (frame) {
-                    setConnected(true);
-                    console.log('Connected: ' + frame);
-
-                    // Subscribe to topic
-                    stompClient.subscribe('/topic/messages', function (messageOutput) {
-                        showMessageOutput(JSON.parse(messageOutput.body));
-                    });
-                },
-                onStompError: function (frame) {
-                    console.error('Broker error: ' + frame.headers['message']);
-                    console.error('Details: ' + frame.body);
-                }
-            });
-
-            stompClient.activate();
-        }
-
-        function disconnect() {
-            if (stompClient !== null) {
-                stompClient.deactivate();
-            }
-            setConnected(false);
-            console.log("Disconnected");
-        }
-
-        function sendMessage() {
-            var from = document.getElementById('from').value;
-            var text = document.getElementById('text').value;
-
-            if (stompClient && stompClient.connected) {
-                stompClient.publish({
-                    destination: '/app/chat',
-                    body: JSON.stringify({ 'from': from, 'text': text })
-                });
-            } else {
-                console.error("Not connected to STOMP broker");
-            }
-        }
-
-        function showMessageOutput(messageOutput) {
-            var response = document.getElementById('response');
-            var p = document.createElement('p');
-            p.style.wordWrap = 'break-word';
-            p.appendChild(document.createTextNode(
-                messageOutput.from + ": " + messageOutput.text + " (" + messageOutput.time + ")"
-            ));
-            response.appendChild(p);
-        }
-    </script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/chat.css">
 </head>
 <body onload="disconnect()">
-<div>
-    <div>
-        <input type="text" id="from" placeholder="Choose a nickname"/>
+
+<div class="chat-card">
+    <h1>WebSocket Chat</h1>
+    <div class="nickname-section">
+        <input type="text" id="from" placeholder="Enter your nickname" />
     </div>
-    <br />
-    <div>
+
+    <div class="button-row">
         <button id="connect" onclick="connect();">Connect</button>
-        <button id="disconnect" disabled="disabled" onclick="disconnect();">
-            Disconnect
-        </button>
+        <button id="disconnect" disabled onclick="disconnect();">Disconnect</button>
     </div>
-    <br />
-    <div id="conversationDiv" style="visibility:hidden;">
-        <input type="text" id="text" placeholder="Write a message..."/>
-        <button id="sendMessage" onclick="sendMessage();">Send</button>
-        <p id="response"></p>
+
+    <div id="conversationDiv" class="conversation hidden">
+        <div class="message-input">
+            <input type="text" id="text" placeholder="Write a message..." />
+            <button id="sendMessage" onclick="sendMessage();">Send</button>
+        </div>
+        <div id="response" class="message-box"></div>
     </div>
 </div>
+
 </body>
 </html>
