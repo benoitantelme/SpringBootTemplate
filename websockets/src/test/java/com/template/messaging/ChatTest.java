@@ -8,9 +8,17 @@ import java.util.concurrent.*;
 import org.junit.jupiter.api.*;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.converter.MappingJackson2MessageConverter;
 import org.springframework.messaging.simp.stomp.*;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.socket.WebSocketHttpHeaders;
 import org.springframework.web.socket.client.standard.StandardWebSocketClient;
 import org.springframework.web.socket.messaging.WebSocketStompClient;
 import org.springframework.web.socket.sockjs.client.RestTemplateXhrTransport;
@@ -22,6 +30,8 @@ import org.springframework.web.socket.sockjs.client.WebSocketTransport;
 public class ChatTest {
 
   @LocalServerPort private int port;
+
+  private RestTemplate restTemplate = new RestTemplate();
 
   private WebSocketStompClient stompClient;
 
@@ -98,9 +108,15 @@ public class ChatTest {
     WebSocketStompClient stompClient = new WebSocketStompClient(sockJsClient);
     stompClient.setMessageConverter(new MappingJackson2MessageConverter());
 
+    // prepare headers with session cookie so the ws calls will be authenticated
+    String sessionCookie = loginAndGetSessionCookie();
+    WebSocketHttpHeaders webSocketHttpHeaders = new WebSocketHttpHeaders();
+    webSocketHttpHeaders.add(HttpHeaders.COOKIE, sessionCookie);
+
     CompletableFuture<StompSession> futureSession = new CompletableFuture<>();
     stompClient.connectAsync(
         "http://localhost:" + port + "/chat",
+        webSocketHttpHeaders,
         new StompSessionHandlerAdapter() {
           @Override
           public void afterConnected(StompSession session, StompHeaders connectedHeaders) {
@@ -130,5 +146,31 @@ public class ChatTest {
         });
 
     return session;
+  }
+
+  // used to get the http session cookie
+  private String loginAndGetSessionCookie() {
+    String loginUrl = "http://localhost:" + port + "/login";
+
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+    MultiValueMap<String, String> form = new LinkedMultiValueMap<>();
+    form.add("username", "user");
+    form.add("password", "user");
+
+    HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(form, headers);
+
+    ResponseEntity<String> response = restTemplate.postForEntity(loginUrl, request, String.class);
+
+    // Extract JSESSIONID cookie from response headers
+    String cookie = response.getHeaders().getFirst(HttpHeaders.SET_COOKIE);
+
+    if (cookie == null) {
+      throw new IllegalStateException("No Set-Cookie header found on login response");
+    }
+
+    // The cookie may contain attributes like Path, HttpOnly; only pass the cookie itself
+    return cookie.split(";")[0];
   }
 }
