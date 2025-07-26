@@ -9,9 +9,10 @@ Using latest versions (hopefully) in a modular way with:
 * embedded DB
 * JPA
 * security (to be extended with oauth2 ...)
+* async
+* websockets
 * actuators
 * Open API
-* async
 * spotless
 
 
@@ -96,6 +97,15 @@ Using latest versions (hopefully) in a modular way with:
 * Expose the slow API
 * Asynchronous service skeleton simulating a slow response
 * http://localhost:8080/slow
+
+
+### Websockets module
+
+* Expose the chat API
+* Override the security to open the chat for websockets connection and subscription, while securing the messages 
+with a channel interceptor
+* Asynchronous chat service using websockets
+* http://localhost:8080/chat.html
 
 
 ## Authors

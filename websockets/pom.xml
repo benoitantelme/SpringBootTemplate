@@ -9,9 +9,9 @@
         <version>1.0</version>
     </parent>
 
-    <artifactId>spring-boot-main-module</artifactId>
-    <name>spring boot main module</name>
-    <description>Template main module</description>
+    <artifactId>spring-boot-websocket-module</artifactId>
+    <name>spring boot web socket module</name>
+    <description>Template web socket module</description>
 
     <dependencies>
         <!--modules-->
@@ -20,30 +20,10 @@
             <artifactId>spring-boot-security-module</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.example</groupId>
-            <artifactId>spring-boot-admin-module</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.example</groupId>
-            <artifactId>spring-boot-async-module</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.example</groupId>
-            <artifactId>spring-boot-jpa-module</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.example</groupId>
-            <artifactId>spring-boot-websocket-module</artifactId>
-            <version>${project.version}</version>
-        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
         </dependency>
 
         <!--   tests    -->
