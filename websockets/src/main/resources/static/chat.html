@@ -1,0 +1,97 @@
+<html>
+<head>
+    <title>Chat WebSocket</title>
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@5.0.0/bundles/stomp.umd.min.js"></script>
+    <script type="text/javascript">
+        var stompClient = null;
+
+        function setConnected(connected) {
+            document.getElementById('connect').disabled = connected;
+            document.getElementById('disconnect').disabled = !connected;
+            document.getElementById('conversationDiv').style.visibility =
+                connected ? 'visible' : 'hidden';
+            document.getElementById('response').innerHTML = '';
+        }
+
+        function connect() {
+            console.log("Connecting to /chat...");
+
+            stompClient = new StompJs.Client({
+                webSocketFactory: () => new SockJS('/chat'),
+                debug: function (str) {
+                    console.log(str);
+                },
+                reconnectDelay: 5000, // auto-reconnect every 5s
+                onConnect: function (frame) {
+                    setConnected(true);
+                    console.log('Connected: ' + frame);
+
+                    // Subscribe to topic
+                    stompClient.subscribe('/topic/messages', function (messageOutput) {
+                        showMessageOutput(JSON.parse(messageOutput.body));
+                    });
+                },
+                onStompError: function (frame) {
+                    console.error('Broker error: ' + frame.headers['message']);
+                    console.error('Details: ' + frame.body);
+                }
+            });
+
+            stompClient.activate();
+        }
+
+        function disconnect() {
+            if (stompClient !== null) {
+                stompClient.deactivate();
+            }
+            setConnected(false);
+            console.log("Disconnected");
+        }
+
+        function sendMessage() {
+            var from = document.getElementById('from').value;
+            var text = document.getElementById('text').value;
+
+            if (stompClient && stompClient.connected) {
+                stompClient.publish({
+                    destination: '/app/chat',
+                    body: JSON.stringify({ 'from': from, 'text': text })
+                });
+            } else {
+                console.error("Not connected to STOMP broker");
+            }
+        }
+
+        function showMessageOutput(messageOutput) {
+            var response = document.getElementById('response');
+            var p = document.createElement('p');
+            p.style.wordWrap = 'break-word';
+            p.appendChild(document.createTextNode(
+                messageOutput.from + ": " + messageOutput.text + " (" + messageOutput.time + ")"
+            ));
+            response.appendChild(p);
+        }
+    </script>
+</head>
+<body onload="disconnect()">
+<div>
+    <div>
+        <input type="text" id="from" placeholder="Choose a nickname"/>
+    </div>
+    <br />
+    <div>
+        <button id="connect" onclick="connect();">Connect</button>
+        <button id="disconnect" disabled="disabled" onclick="disconnect();">
+            Disconnect
+        </button>
+    </div>
+    <br />
+    <div id="conversationDiv" style="visibility:hidden;">
+        <input type="text" id="text" placeholder="Write a message..."/>
+        <button id="sendMessage" onclick="sendMessage();">Send</button>
+        <p id="response"></p>
+    </div>
+</div>
+</body>
+</html>
