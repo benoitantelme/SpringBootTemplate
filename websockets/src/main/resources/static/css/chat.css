@@ -15,13 +15,15 @@ body {
 }
 
 /* Shared card style (for login and chat forms) */
-.card {
+.card,
+.chat-card {
     background: #1e1e1e; /* Dark grey card */
     border-radius: 12px;
     padding: 20px;
-    width: 350px;
+    width: 380px; /* Increased width to avoid overflow */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
     margin-bottom: 20px;
+    box-sizing: border-box;
 }
 
 /* Inputs */
@@ -74,11 +76,6 @@ button:hover:not(:disabled) {
 
 /* Chat container below connect form */
 .chat-card {
-    background: #1e1e1e;
-    border-radius: 12px;
-    padding: 20px;
-    width: 350px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -97,11 +94,12 @@ button:hover:not(:disabled) {
     display: flex;
     flex-direction: column;
     gap: 8px;
+    box-sizing: border-box; /* Prevent padding from causing overflow */
 }
 
 /* Message bubble base */
 .message {
-    max-width: 75%;
+    max-width: 85%; /* Prevents bubbles from touching edges */
     padding: 8px 12px;
     border-radius: 18px;
     font-size: 14px;
@@ -131,4 +129,19 @@ button:hover:not(:disabled) {
 .other-message.user-color-2 { background: #2e3b55; }  /* Dark blue */
 .other-message.user-color-3 { background: #2e553b; }  /* Dark green */
 .other-message.user-color-4 { background: #553a2e; }  /* Dark orange */
-.other-message.user-color-5 { backgroun
+.other-message.user-color-5 { background: #3b2e55; }  /* Dark purple */
+
+/* Name color for each user bubble variant */
+.user-color-1-name { color: #cccccc; }
+.user-color-2-name { color: #9ab4ff; }
+.user-color-3-name { color: #9affb4; }
+.user-color-4-name { color: #ffb49a; }
+.user-color-5-name { color: #c49aff; }
+
+/* Timestamp style */
+.timestamp {
+    font-size: 10px;
+    color: #aaa;
+    margin-top: 4px;
+    align-self: flex-end;
+}
