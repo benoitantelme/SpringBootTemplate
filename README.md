@@ -107,6 +107,9 @@ with a channel interceptor
 * Asynchronous chat service using websockets
 * http://localhost:8080/chat.html
 
+![Screenshot of the chat.](/websockets/src/main/resources/content/Chat.jpg)
+
+
 
 ## Authors
 
