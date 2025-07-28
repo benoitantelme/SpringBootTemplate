@@ -19,11 +19,14 @@ public class SecurityConfiguration {
   @Bean
   @Order(10)
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-    http
-        // hello is open
-        .authorizeHttpRequests((requests) -> requests.requestMatchers("/hello").permitAll())
-        .authorizeHttpRequests((requests) -> requests.anyRequest().authenticated())
-        .formLogin((form) -> form.loginPage("/login").permitAll())
+    http.authorizeHttpRequests(
+            requests ->
+                requests
+                    .requestMatchers("/js/**", "/css/**")
+                    .permitAll()
+                    .anyRequest()
+                    .authenticated())
+        .formLogin((form) -> form.loginPage("/login").defaultSuccessUrl("/home", true).permitAll())
         .logout(LogoutConfigurer::permitAll);
 
     return http.build();
