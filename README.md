@@ -66,6 +66,8 @@ Using latest versions (hopefully) in a modular way with:
 * Any request will be redirected to the login page, http://localhost:8080/login, so a user can authenticate (basic)
 * Main home for http://localhost:8080/ will be redirected automatically to http://localhost:8080/?continue which corresponds to http://localhost:8080/home
 
+![Screenshot of the chat.](/security/src/main/resources/content/login.jpg)
+
 
 ### Admin module
 
