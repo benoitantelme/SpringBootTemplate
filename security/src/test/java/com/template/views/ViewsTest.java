@@ -37,4 +37,12 @@ public class ViewsTest {
         .andExpect(status().isOk())
         .andExpect(content().string(containsString("here</a> to see a greeting.</p>")));
   }
+
+  @WithMockUser(roles = "USER", username = "user")
+  @Test
+  public void getHello() throws Exception {
+    mvc.perform(MockMvcRequestBuilders.get("/hello").accept(MediaType.TEXT_HTML))
+        .andExpect(status().isOk())
+        .andExpect(content().string(containsString("From Spring Boot")));
+  }
 }
