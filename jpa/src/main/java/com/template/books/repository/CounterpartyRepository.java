@@ -1,6 +1,6 @@
-package com.template.counterparties.repository;
+package com.template.books.repository;
 
-import com.template.counterparties.model.Counterparty;
+import com.template.books.model.Counterparty;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;

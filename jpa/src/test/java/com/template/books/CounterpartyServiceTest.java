@@ -1,9 +1,9 @@
-package com.template.counterparties;
+package com.template.books;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.template.counterparties.model.Counterparty;
-import com.template.counterparties.service.CounterpartyService;
+import com.template.books.model.Counterparty;
+import com.template.books.service.CounterpartyService;
 import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.MethodOrderer;

@@ -1,7 +1,7 @@
 package com.template.trades.service;
 
-import com.template.counterparties.model.Counterparty;
-import com.template.counterparties.repository.CounterpartyRepository;
+import com.template.books.model.Counterparty;
+import com.template.books.repository.CounterpartyRepository;
 import com.template.trades.model.Trade;
 import com.template.trades.repository.TradeRepository;
 import java.util.List;

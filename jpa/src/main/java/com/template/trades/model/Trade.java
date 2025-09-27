@@ -1,6 +1,6 @@
 package com.template.trades.model;
 
-import com.template.counterparties.model.Counterparty;
+import com.template.books.model.Counterparty;
 import jakarta.persistence.*;
 
 @Entity

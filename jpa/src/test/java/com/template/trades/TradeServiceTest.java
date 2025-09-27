@@ -2,7 +2,7 @@ package com.template.trades;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.template.counterparties.model.Counterparty;
+import com.template.books.model.Counterparty;
 import com.template.trades.model.Currency;
 import com.template.trades.model.Trade;
 import com.template.trades.service.TradeService;

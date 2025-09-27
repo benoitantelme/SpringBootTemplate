@@ -1,4 +1,4 @@
-package com.template.counterparties.model;
+package com.template.books.model;
 
 import jakarta.persistence.*;
 

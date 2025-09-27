@@ -1,7 +1,7 @@
-package com.template.counterparties.service;
+package com.template.books.service;
 
-import com.template.counterparties.model.Counterparty;
-import com.template.counterparties.repository.CounterpartyRepository;
+import com.template.books.model.Counterparty;
+import com.template.books.repository.CounterpartyRepository;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;

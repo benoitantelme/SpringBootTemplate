@@ -1,7 +1,7 @@
-package com.template.counterparties.repository;
+package com.template.books.repository;
 
-import com.template.counterparties.model.Counterparty;
-import com.template.counterparties.service.CounterpartyService;
+import com.template.books.model.Counterparty;
+import com.template.books.service.CounterpartyService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
