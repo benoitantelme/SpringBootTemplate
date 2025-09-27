@@ -26,9 +26,18 @@ public class BooksControllerTest {
   @WithMockUser(roles = "USER", username = "user")
   @Test
   @Order(1)
-  public void getCounterparties() throws Exception {
+  public void getBooks() throws Exception {
     mvc.perform(MockMvcRequestBuilders.get("/books").accept(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.length()", is(5000)));
+  }
+
+  @WithMockUser(roles = "USER", username = "user")
+  @Test
+  @Order(2)
+  public void getPage() throws Exception {
+    mvc.perform(MockMvcRequestBuilders.get("/books/2/1000").accept(MediaType.APPLICATION_JSON))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.length()", is(1000)));
   }
 }

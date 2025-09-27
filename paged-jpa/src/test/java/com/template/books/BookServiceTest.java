@@ -24,4 +24,12 @@ public class BookServiceTest {
     List<Book> bookList = service.findBook();
     assertEquals(5000, bookList.size());
   }
+
+  @Test
+  @Order(2)
+  public void testFindPage() {
+    List<Book> bookList = service.findBooks(2, 50);
+    assertEquals(50, bookList.size());
+    assertTrue(bookList.getFirst().getName().contains("100"));
+  }
 }

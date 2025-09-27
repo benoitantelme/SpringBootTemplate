@@ -15,4 +15,9 @@ public class BookController {
   public List<Book> getBooks() {
     return bookService.findBook();
   }
+
+  @GetMapping("/books/{page}/{size}")
+  public List<Book> getBooksPage(@PathVariable Integer page, @PathVariable Integer size) {
+    return bookService.findBooks(page, size);
+  }
 }
