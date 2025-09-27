@@ -1,6 +1,6 @@
 package com.template.trades.repository;
 
-import com.template.books.model.Counterparty;
+import com.template.counterparties.model.Counterparty;
 import com.template.trades.model.Currency;
 import com.template.trades.model.Trade;
 import com.template.trades.service.TradeService;

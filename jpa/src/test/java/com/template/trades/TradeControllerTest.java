@@ -5,7 +5,7 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.template.books.model.Counterparty;
+import com.template.counterparties.model.Counterparty;
 import com.template.trades.model.Currency;
 import com.template.trades.model.Trade;
 import org.junit.jupiter.api.MethodOrderer;
