@@ -83,15 +83,24 @@ Using latest versions (hopefully) in a modular way with:
 
 ### JPA module
 
-* Expose the trade and book APIs
+* Expose the trade and counterparty APIs
 * Using h2 embedded db and Spring data JPA
 * Controllers for get, post and getAll
 * http://localhost:8080/trades
 * http://localhost:8080/trade/{id}
 * http://localhost:8080/trade (POST)
 * http://localhost:8080/counterparties
-* http://localhost:8080/book/{id}
-* http://localhost:8080/book (POST)
+* http://localhost:8080/counterparty/{id}
+* http://localhost:8080/counterparty (POST)
+
+
+### Paged JPA module
+
+* Expose the book API
+* Using h2 embedded db and Spring data JPA
+* Controllers for getAll and getAll by page
+* http://localhost:8080/books
+* http://localhost:8080/books/{page}/{size}
 
 
 ### Async module
