@@ -94,6 +94,15 @@ Using latest versions (hopefully) in a modular way with:
 * http://localhost:8080/counterparty (POST)
 
 
+### Paged JPA module
+
+* Expose the book API
+* Using h2 embedded db and Spring data JPA
+* Controllers for getAll and getAll by page
+* http://localhost:8080/books
+* http://localhost:8080/books/{page}/{size}
+
+
 ### Async module
 
 * Expose the slow API

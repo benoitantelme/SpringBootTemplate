@@ -9,9 +9,10 @@
         <version>1.0</version>
     </parent>
 
-    <artifactId>spring-boot-main-module</artifactId>
-    <name>spring boot main module</name>
-    <description>Template main module</description>
+    <artifactId>spring-boot-paged-jpa-module</artifactId>
+    <name>spring boot paged jpa module</name>
+    <version>1.0</version>
+    <description>Template paged jpa module</description>
 
     <dependencies>
         <!--modules-->
@@ -20,35 +21,21 @@
             <artifactId>spring-boot-security-module</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.example</groupId>
-            <artifactId>spring-boot-admin-module</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.example</groupId>
-            <artifactId>spring-boot-async-module</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.example</groupId>
-            <artifactId>spring-boot-jpa-module</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.example</groupId>
-            <artifactId>spring-boot-paged-jpa-module</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.example</groupId>
-            <artifactId>spring-boot-websocket-module</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
+        
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!--   db    -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope>
         </dependency>
 
         <!--   tests    -->
