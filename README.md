@@ -4,10 +4,10 @@ Template for spring boot web application.
 
 ## Description
 
-Using latest versions (hopefully) in a modular way with:
+Using latest versions (hopefully, Java 24 and Spring Boot 4) in a modular way with:
 * APIs
 * embedded DB
-* JPA
+* JPA (normal and paged APIs)
 * security (to be extended with oauth2 ...)
 * async
 * websockets
@@ -128,6 +128,8 @@ with a channel interceptor
 
 ## Version History
 
+* 1.1
+    * Update to Spring Boot 4
 * 1.0
     * Initial Release
 

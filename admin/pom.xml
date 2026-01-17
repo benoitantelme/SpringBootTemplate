@@ -6,11 +6,11 @@
     <parent>
         <groupId>com.example</groupId>
         <artifactId>spring-boot-template</artifactId>
-        <version>1.0</version>
+        <version>1.1</version>
     </parent>
 
     <artifactId>spring-boot-admin-module</artifactId>
-    <version>1.0</version>
+    <version>1.1</version>
     <name>spring boot admin module</name>
     <description>Template admin module</description>
 

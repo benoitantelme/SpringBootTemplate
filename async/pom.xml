@@ -6,11 +6,11 @@
     <parent>
         <groupId>com.example</groupId>
         <artifactId>spring-boot-template</artifactId>
-        <version>1.0</version>
+        <version>1.1</version>
     </parent>
 
     <artifactId>spring-boot-async-module</artifactId>
-    <version>1.0</version>
+    <version>1.1</version>
     <name>spring boot async module</name>
     <description>Template async module</description>
 

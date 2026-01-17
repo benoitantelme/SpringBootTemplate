@@ -12,14 +12,14 @@
 
     <groupId>com.example</groupId>
     <artifactId>spring-boot-template</artifactId>
-    <version>1.0</version>
+    <version>1.1</version>
     <name>spring boot template</name>
     <description>Template project for Spring Boot</description>
     <packaging>pom</packaging>
 
     <properties>
         <java.version>24</java.version>
-        <project.version>1.0</project.version>
+        <project.version>1.1</project.version>
         <spring-boot.version>4.0.1</spring-boot.version>
         <spring-security-test.version>7.0.2</spring-security-test.version>
         <h2.version>2.3.232</h2.version>
