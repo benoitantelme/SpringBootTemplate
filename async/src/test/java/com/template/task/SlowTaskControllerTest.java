@@ -1,6 +1,7 @@
 package com.template.task;
 
 import static org.hamcrest.Matchers.equalTo;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import org.junit.jupiter.api.MethodOrderer;
@@ -10,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
@@ -21,10 +21,12 @@ public class SlowTaskControllerTest {
 
   @Autowired private MockMvc mvc;
 
-  @WithMockUser(roles = "USER", username = "user")
   @Test
   public void slowTaskTest() throws Exception {
-    mvc.perform(MockMvcRequestBuilders.get("/slow").accept(MediaType.APPLICATION_JSON))
+    mvc.perform(
+            MockMvcRequestBuilders.get("/slow")
+                .with(user("user"))
+                .accept(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk())
         .andExpect(content().string(equalTo(SlowTaskController.PROCESSING_STARTED)));
   }
