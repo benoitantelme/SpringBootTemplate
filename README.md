@@ -20,8 +20,7 @@ Using latest versions (hopefully) in a modular way with:
 
 ### Dependencies
 
-* spring-boot-starter-parent|web|actuator|security|data-jpa|test
-* thymeleaf-extras-springsecurity6
+* spring-boot-starter-parent|web|actuator|security|data-jpa|test|Thymeleaf
 * h2
 * junit
 
