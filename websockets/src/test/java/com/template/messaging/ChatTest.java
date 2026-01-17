@@ -12,7 +12,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.messaging.converter.MappingJackson2MessageConverter;
+import org.springframework.messaging.converter.JacksonJsonMessageConverter;
 import org.springframework.messaging.simp.stomp.*;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.util.LinkedMultiValueMap;
@@ -43,7 +43,7 @@ public class ChatTest {
 
     SockJsClient sockJsClient = new SockJsClient(transports);
     stompClient = new WebSocketStompClient(sockJsClient);
-    stompClient.setMessageConverter(new MappingJackson2MessageConverter());
+    stompClient.setMessageConverter(new JacksonJsonMessageConverter());
   }
 
   @Test
@@ -106,7 +106,7 @@ public class ChatTest {
 
     SockJsClient sockJsClient = new SockJsClient(transports);
     WebSocketStompClient stompClient = new WebSocketStompClient(sockJsClient);
-    stompClient.setMessageConverter(new MappingJackson2MessageConverter());
+    stompClient.setMessageConverter(new JacksonJsonMessageConverter());
 
     // prepare headers with session cookie so the ws calls will be authenticated
     String sessionCookie = loginAndGetSessionCookie();

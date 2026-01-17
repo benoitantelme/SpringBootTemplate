@@ -1,21 +1,39 @@
+springdoc:
+  show-actuator: true
 
 management:
   server:
     port: 8080
   endpoint:
     health:
+      enabled: true
       show-details: always
       show-components: always
+      show-values: when-authorized
+      probes:
+        enabled: true
     metrics:
       enabled: true
+      show-values: when-authorized
+    beans:
+      enabled: true
+      show-values: when-authorized
     env:
-      show-values: WHEN_AUTHORIZED
+      enabled: true
+      show-values: when-authorized
       keys-to-sanitize: password,secret
     configprops:
-      show-values: WHEN_AUTHORIZED
+      enabled: true
+      show-values: when-authorized
   endpoints:
     web:
+      discovery:
+        enabled: true
       exposure:
         include: health, info, metrics, beans, env, configprops
   security:
     enabled: true
+
+spring:
+  main:
+    allow-bean-definition-overriding: true

@@ -4,3 +4,7 @@ management:
     port: 8080
   security:
     enabled: true
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
