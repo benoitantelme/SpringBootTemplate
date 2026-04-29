@@ -128,6 +128,8 @@ with a channel interceptor
 
 ## Version History
 
+* 1.2
+  * Update to Spring Boot 4.0.6
 * 1.1
     * Update to Spring Boot 4
 * 1.0
